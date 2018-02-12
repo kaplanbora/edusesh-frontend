@@ -2,26 +2,29 @@ import React from "react";
 import {connect} from "react-redux";
 import {registerRequest} from "../actions";
 import UserInput from "../components/user-input"
+import {Field, reduxForm} from "redux-form";
 
-const RegisterPage = ({email, password, register}) => {
-  let emailInput;
-  let passwordInput;
+let RegisterPage = ({email, password, register}) => {
   return (
-    <form onSubmit={() => register({
-      email: emailInput.value,
-      password: passwordInput.value
-    })}>
-      <UserInput
-        label={"Email"}
-        placeholder={"Your email address"}
+    <form onSubmit={(e) => {
+      e.preventDefault();
+      return register("");
+    }}>
+      <Field
+        label="Email"
+        name="email"
+        placeholder="Your email address"
         status={email.status}
         hint={email.message}
+        component={UserInput}
       />
-      <UserInput
-        label={"Password"}
-        placeholder={"Your password"}
+      <Field
+        label="Password"
+        name="password"
+        placeholder="Your password"
         status={password.status}
         hint={password.message}
+        component={UserInput}
       />
       <button className="btn btn-primary">Register</button>
     </form>
@@ -39,4 +42,10 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage)
+RegisterPage = reduxForm({
+  form: "registerForm"
+})(RegisterPage);
+
+RegisterPage = connect(mapStateToProps, mapDispatchToProps)(RegisterPage);
+
+export default RegisterPage

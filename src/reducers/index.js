@@ -1,5 +1,6 @@
 import {combineReducers} from "redux";
 import {LOGIN_REQUEST, REGISTER_REQUEST} from "../actions/types";
+import {reducer as formReducer} from "redux-form";
 
 const tokenReducer = (state = null, action) => {
   switch (action.type) {
@@ -24,7 +25,13 @@ const initialRegisterPage = {
 const registerReducer = (state = initialRegisterPage, action) => {
   switch (action.type) {
     case REGISTER_REQUEST:
-      return state;
+      return {
+        email: state.email,
+        password: {
+          status: "error",
+          message: "Password cannot be empty."
+        }
+      };
     default:
       return state;
   }
@@ -32,7 +39,8 @@ const registerReducer = (state = initialRegisterPage, action) => {
 
 const eduseshReducers = combineReducers({
   token: tokenReducer,
-  registerPage: registerReducer
+  registerPage: registerReducer,
+  form: formReducer
 });
 
 export default eduseshReducers
