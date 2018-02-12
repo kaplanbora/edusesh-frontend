@@ -4,5 +4,17 @@ html, body {
 }
 
 #root {
-    color: green;
+}
+
+.navbar {
+    padding: 12px;
+    background: rgba(248, 249, 250, .65);
+}
+
+.register-page > input {
+    width: 420px;
+}
+
+.hidden {
+    display: none;
 }
