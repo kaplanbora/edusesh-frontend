@@ -1,10 +1,10 @@
 import {combineReducers} from "redux";
-import {LOGIN_REQUEST, REGISTER_REQUEST} from "../actions/types";
+import {LOGIN_SUCCESSFUL, REGISTER_REQUEST} from "../actions/types";
 import {reducer as formReducer} from "redux-form";
 
 const tokenReducer = (state = null, action) => {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case LOGIN_SUCCESSFUL:
       return action.token ? action.token : null;
     default:
       return state;

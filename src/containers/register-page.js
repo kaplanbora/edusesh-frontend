@@ -1,16 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
-import {registerRequest} from "../actions";
 import UserInput from "../components/user-input"
 import {Field, reduxForm} from "redux-form";
-import {checkEmail} from "../actions/register";
+import {checkEmail, register} from "../actions/register";
 
-let RegisterPage = ({register}) => {
+let RegisterPage = ({handleSubmit, error}) => {
   return (
-    <form onSubmit={(e) => {
-      e.preventDefault();
-      return register("");
-    }}>
+    <form onSubmit={handleSubmit}>
       <Field
         label="Email"
         name="email"
@@ -23,6 +19,7 @@ let RegisterPage = ({register}) => {
         placeholder="Your password"
         component={UserInput}
       />
+      {error && <span>{error}</span>}
       <button className="btn btn-primary">Register</button>
     </form>
   );
@@ -33,8 +30,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  register: credentials => {
-    dispatch(registerRequest(credentials))
+  onSubmit: credentials => {
+    dispatch(register(credentials))
   }
 });
 
