@@ -8,14 +8,11 @@ import App from "./components/app"
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 
-function Hello(props) {
-  return (
-    <div>Hello</div>
-  );
-}
-
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={createStoreWithMiddleware(
+    reducers,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )}>
     <App/>
   </Provider>
   , document.querySelector("#root")

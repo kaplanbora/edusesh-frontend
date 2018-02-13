@@ -2,13 +2,16 @@ import React from "react";
 import style from "../../style/master.css";
 import NavbarGuest from "./navbar-guest"
 import RegisterPage from "../containers/register-page"
+import {BrowserRouter, Route} from "react-router-dom";
 
 const App = () => {
   return (
-    <div>
-      <NavbarGuest/>
-      <RegisterPage/>
-    </div>
+    <BrowserRouter>
+      <div>
+        <NavbarGuest/>
+        <Route path="/users/register" component={RegisterPage}/>
+      </div>
+    </BrowserRouter>
   );
 };
 
