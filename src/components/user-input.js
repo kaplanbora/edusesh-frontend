@@ -1,25 +1,18 @@
 import React from "react";
 
-const UserInput = (field) => {
-  let statusClass = "";
-  let hintClass = "hidden";
-  if (field.status === "error") {
-    statusClass = "is-error";
-    hintClass = "";
-  } else if (field.status === "success") {
-    statusClass = "is-success";
-    hintClass = "";
-  }
-
+const UserInput = ({input, label, placeholder, meta: {asyncValidating, touched, error}}) => {
   return (
     <div className="form-group">
-      <label className="form-label">{field.label}</label>
-      <input className={`form-input ${statusClass}`}
-             type={field.label === "Password" ? "password" : "text"}
-             placeholder={field.placeholder}
-             {...field.input}
-      />
-      <p className={`form-input-hint ${hintClass}`}>{field.hint}</p>
+      <label className="form-label">{label}</label>
+      <div className="has-icon-right user-input">
+        <input className={`form-input ${touched && error ? "is-error" : ""}`}
+               {...input}
+               type={label === "Password" ? "password" : "text"}
+               placeholder={placeholder}
+        />
+        {asyncValidating && <i className="form-icon loading"/>}
+        {touched && error && <p className="form-input-hint">{error}</p>}
+      </div>
     </div>
   );
 };

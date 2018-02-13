@@ -3,8 +3,9 @@ import {connect} from "react-redux";
 import {registerRequest} from "../actions";
 import UserInput from "../components/user-input"
 import {Field, reduxForm} from "redux-form";
+import {checkEmail} from "../actions/register";
 
-let RegisterPage = ({email, password, register}) => {
+let RegisterPage = ({register}) => {
   return (
     <form onSubmit={(e) => {
       e.preventDefault();
@@ -14,16 +15,12 @@ let RegisterPage = ({email, password, register}) => {
         label="Email"
         name="email"
         placeholder="Your email address"
-        status={email.status}
-        hint={email.message}
         component={UserInput}
       />
       <Field
         label="Password"
         name="password"
         placeholder="Your password"
-        status={password.status}
-        hint={password.message}
         component={UserInput}
       />
       <button className="btn btn-primary">Register</button>
@@ -32,8 +29,7 @@ let RegisterPage = ({email, password, register}) => {
 };
 
 const mapStateToProps = state => ({
-  email: state.registerPage.email,
-  password: state.registerPage.password,
+  token: state.token
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -42,7 +38,31 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const asyncValidate = (values /*, dispatch */) => {
+  return sleep(1000).then(() => { // simulate server latency
+    if (['john', 'paul', 'george', 'ringo'].includes(values.email)) {
+      throw {email: 'That username is taken'};
+    }
+  });
+};
+
+const validate = inputs => {
+  const errors = {};
+  if (!inputs.email) {
+    errors.email = "Please enter a valid email address."
+  }
+  if (!inputs.password || inputs.password.length < 8) {
+    errors.password = "Password cannot be shorter than 8 characters."
+  }
+  return errors;
+};
+
 RegisterPage = reduxForm({
+  validate,
+  asyncValidate: checkEmail,
+  asyncBlurFields: ["email"],
   form: "registerForm"
 })(RegisterPage);
 
