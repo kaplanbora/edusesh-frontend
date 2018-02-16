@@ -1,7 +1,7 @@
 import React from "react";
 import style from "../../style/master.css";
 import spectre from "../../style/spectre.min.css";
-import NavbarGuest from "./navbar-guest"
+import NavbarGuest from "./guest-navbar"
 import RegisterPage from "../containers/register-page"
 import {BrowserRouter, Route} from "react-router-dom";
 

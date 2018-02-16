@@ -20,5 +20,10 @@ html, body {
     width: 420px;
 }
 
-.register-page {
+.right-mg {
+    margin-right: 12px;
+}
+
+.search-bar {
+    width: 600px;
 }

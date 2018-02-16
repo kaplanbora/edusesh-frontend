@@ -10,7 +10,7 @@ export const checkEmail = values => {
     if (response.data.emailExists) {
       throw {email: "This email address is taken."}
     }
-  })
+  }).catch(e => console.log("Error at email check: " + e.message))
 };
 
 const login = credentials => {
@@ -24,13 +24,13 @@ const login = credentials => {
   });
 };
 
-export const register = values => {
+const register = (values, role) => {
   const credentials = {
     email: values.email,
     password: values.password
   };
 
-  const request = axios.post(`${API_URL}/users/register?role=trainee`, credentials)
+  const request = axios.post(`${API_URL}/users/register?role=${role}`, credentials)
     .then(response => {
       if (response.status !== 201) {
         throw new SubmissionError({
@@ -46,3 +46,7 @@ export const register = values => {
     payload: request
   };
 };
+
+export const registerTrainee = values => register(values, "trainee");
+
+export const registerInstructor = values => register(values, "instructor");

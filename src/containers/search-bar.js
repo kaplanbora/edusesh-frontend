@@ -10,7 +10,7 @@ const SearchBar = () => {
   let searchInput;
   return (
     <form onSubmit={(e) => onSearch(e, searchInput)}>
-      <div className="input-group input-inline">
+      <div className="input-group input-inline search-bar">
         <input className="form-input" placeholder="Find instructors" ref={node => {
           searchInput = node
         }}/>
