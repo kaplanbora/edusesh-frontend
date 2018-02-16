@@ -1,13 +1,13 @@
 const API_URL = "http://localhost:9000";
 import axios from "axios";
 import {SubmissionError} from 'redux-form';
-import {LOGIN_SUCCESSFUL} from "./types";
+import {SET_TOKEN} from "./types";
 
 export const checkEmail = values => {
   return axios.post(`${API_URL}/users/email`, {
     email: values.email
   }).then(response => {
-    if (response.data["email-exists"]) {
+    if (response.data.emailExists) {
       throw {email: "This email address is taken."}
     }
   })
@@ -30,18 +30,19 @@ export const register = values => {
     password: values.password
   };
 
-  // Make this return token. Change controller result.
   const request = axios.post(`${API_URL}/users/register?role=trainee`, credentials)
     .then(response => {
-      if (!response.data.id) {
+      if (response.status !== 201) {
         throw new SubmissionError({
-          _error: "Something went wrong.",
+          _error: "Something went wrong on user creation.",
         });
       }
-    });
+      return response.data.token;
+    })
+    .catch(e => console.log("Error at register: " + e.message));
 
   return {
-    type: LOGIN_SUCCESSFUL,
-    user: request
+    type: SET_TOKEN,
+    payload: request
   };
 };

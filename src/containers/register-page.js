@@ -1,27 +1,38 @@
 import React from "react";
+import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import UserInput from "../components/user-input"
 import {Field, reduxForm} from "redux-form";
 import {checkEmail, register} from "../actions/register";
 
-let RegisterPage = ({handleSubmit, error}) => {
+let RegisterPage = ({handleSubmit, error, token}) => {
+  if (token) {
+    return <Redirect to="/"/>;
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <Field
-        label="Email"
-        name="email"
-        placeholder="Your email address"
-        component={UserInput}
-      />
-      <Field
-        label="Password"
-        name="password"
-        placeholder="Your password"
-        component={UserInput}
-      />
-      {error && <span>{error}</span>}
-      <button className="btn btn-primary">Register</button>
-    </form>
+    <div className="container register-page">
+      <div className="columns">
+        <div className="col-12 column">
+          <form onSubmit={handleSubmit}>
+            <Field
+              label="Email"
+              name="email"
+              placeholder="Your email address"
+              component={UserInput}
+            />
+            <Field
+              label="Password"
+              name="password"
+              placeholder="Your password"
+              component={UserInput}
+            />
+            {error && <span>{error}</span>}
+            <button className="btn btn-primary">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 

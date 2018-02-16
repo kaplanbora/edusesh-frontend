@@ -1,6 +1,7 @@
 html, body {
     padding: 0;
     margin: 0;
+    height: 100%;
 }
 
 #root {
@@ -16,5 +17,8 @@ html, body {
 }
 
 .user-input {
-    width: 620px;
+    width: 420px;
+}
+
+.register-page {
 }

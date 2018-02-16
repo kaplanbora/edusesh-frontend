@@ -1,2 +1,3 @@
 export const LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL";
+export const SET_TOKEN = "SET_TOKEN";
 export const REGISTER_REQUEST = "REGISTER_REQUEST";

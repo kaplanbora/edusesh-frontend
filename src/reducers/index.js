@@ -1,45 +1,26 @@
+import Cookies from 'universal-cookie';
 import {combineReducers} from "redux";
-import {LOGIN_SUCCESSFUL, REGISTER_REQUEST} from "../actions/types";
+import {LOGIN_SUCCESSFUL, REGISTER_REQUEST, SET_TOKEN} from "../actions/types";
 import {reducer as formReducer} from "redux-form";
 
 const tokenReducer = (state = null, action) => {
   switch (action.type) {
-    case LOGIN_SUCCESSFUL:
-      return action.token ? action.token : null;
-    default:
-      return state;
+    case SET_TOKEN:
+      if (action.payload) {
+        const twoWeeksLater = Date.now() + (60 * 60 * 24 * 14 * 1000);
+        const cookies = new Cookies();
+        cookies.set("token", action.payload, {
+          path: "/",
+          expires: new Date(twoWeeksLater)
+        });
+        return action.payload;
+      }
   }
-};
-
-const initialRegisterPage = {
-  email: {
-    status: null,
-    message: null,
-  },
-  password: {
-    status: null,
-    message: null,
-  }
-};
-
-const registerReducer = (state = initialRegisterPage, action) => {
-  switch (action.type) {
-    case REGISTER_REQUEST:
-      return {
-        email: state.email,
-        password: {
-          status: "error",
-          message: "Password cannot be empty."
-        }
-      };
-    default:
-      return state;
-  }
+  return state;
 };
 
 const eduseshReducers = combineReducers({
   token: tokenReducer,
-  registerPage: registerReducer,
   form: formReducer
 });
 
