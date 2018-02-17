@@ -11,7 +11,11 @@ const SearchBar = () => {
   return (
     <form onSubmit={(e) => onSearch(e, searchInput)}>
       <div className="input-group input-inline search-bar">
-        <input className="form-input" placeholder="Find instructors" ref={node => {
+        <select className="form-select">
+          <option>Topic</option>
+          <option>Instructor</option>
+        </select>
+        <input className="form-input" placeholder="Find topics or instructors" ref={node => {
           searchInput = node
         }}/>
         <button className="btn btn-primary input-group-btn">Search</button>

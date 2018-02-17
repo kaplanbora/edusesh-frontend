@@ -1,6 +1,6 @@
 import Cookies from 'universal-cookie';
 import {combineReducers} from "redux";
-import {LOGIN_SUCCESSFUL, REGISTER_REQUEST, SET_TOKEN} from "../actions/types";
+import {LOAD_CREDENTIALS, LOAD_PROFILE, LOAD_TOKEN, SET_TOKEN} from "../actions/types";
 import {reducer as formReducer} from "redux-form";
 
 const tokenReducer = (state = null, action) => {
@@ -15,11 +15,39 @@ const tokenReducer = (state = null, action) => {
         });
         return action.payload;
       }
+      break;
+    case LOAD_TOKEN:
+      return action.payload;
+  }
+  return state;
+};
+
+const initialState = {
+  profile: {},
+  credentials: {}
+};
+
+const userReducer = (state = initialState, action) => {
+  console.log(action);
+  switch (action.type) {
+    case LOAD_CREDENTIALS:
+      const credentials = action.payload.data;
+      return {
+        profile: state.profile,
+        credentials
+      };
+    case LOAD_PROFILE:
+      const profile = action.payload.data;
+      return {
+        profile,
+        credentials: state.credentials
+      };
   }
   return state;
 };
 
 const eduseshReducers = combineReducers({
+  user: userReducer,
   token: tokenReducer,
   form: formReducer
 });

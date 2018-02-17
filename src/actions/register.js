@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:9000";
+import {API_URL} from "./types";
 import axios from "axios";
 import {SubmissionError} from 'redux-form';
 import {SET_TOKEN} from "./types";
