@@ -1,20 +1,27 @@
 import React from "react";
 import {CredentialsForm} from "./credentials-form";
 import {reduxForm} from "redux-form";
+import {Field} from "redux-form";
+
+const RememberCheck = ({input}) => {
+	return (
+    <label className="form-checkbox my-2">
+	    <input className="form-checkbox" {...input} type="checkbox"/>
+      <i className="form-icon"/> Remember me
+    </label>
+	);
+};
 
 const LoginForm = ({handleSubmit, error}) => {
   return (
-    <div className="container register-form">
+    <div className="container login-form">
       <form onSubmit={handleSubmit}>
         <h1>Sign In</h1>
         <div className="divider"/>
         <CredentialsForm/>
-        {error && <p className="form-input-hint">error</p>}
-        <label className="form-checkbox">
-          <input type="checkbox"/>
-          <i className="form-icon"/> Remember me
-        </label>
-        <button className="btn btn-primary form-submit">Login</button>
+        <p className="">{error}</p>
+	      <Field name="remember" component={RememberCheck}/>
+        <button className="btn btn-primary float-right my-2">Login</button>
       </form>
     </div>
   );

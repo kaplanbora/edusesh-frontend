@@ -1,7 +1,7 @@
 import {API_URL} from "./types";
 import axios from "axios";
 import {SubmissionError} from 'redux-form';
-import {SET_TOKEN} from "./types";
+import {SET_TOKEN, SET_TOKEN_NO_COOKIE} from "./types";
 
 export const checkEmail = values => {
   return axios.post(`${API_URL}/users/email`, {
@@ -19,21 +19,34 @@ export const loginUser = values => {
     password: values.password
   };
 
+	const request = axios({
+		method: "post",
+		url: API_URL + "/users/login",
+		data: credentials,
+		validateStatus: status => true
+	}).then(response => {
+		if (response.status !== 200) {
+			throw new SubmissionError({
+				_error: "No user found with this email and password."
+			})
+		}
+		return response.data.token;
+	});
+
+	/*
   const request = axios.post(`${API_URL}/users/login`, credentials)
-    .then(response => {
-      console.log(response);
-      if (response.status !== 200) {
+    .then(response => response.data.token)
+		.catch(error => {
+			if (error.response) {
         throw new SubmissionError({
-          _error: "No user found with these email and password."
+          _error: "No user found with this email and password."
         })
-      }
-      return {
-        token: response.data.token
-      }
-    }).catch(e => console.log("Error at login: " + e.message));
+			}
+		});
+		*/
 
   return {
-    type: SET_TOKEN,
+		type: values.remember ? SET_TOKEN : SET_TOKEN_NO_COOKIE,
     payload: request
   };
 };
