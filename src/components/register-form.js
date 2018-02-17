@@ -6,27 +6,26 @@ import {checkEmail} from "../actions/register";
 
 const RegisterForm = ({handleSubmit, error}) => {
   return (
-    <div className="container">
-      <div className="columns">
-        <div className="col-12 column">
-          <form onSubmit={handleSubmit}>
-            <Field
-              label="Email"
-              name="email"
-              placeholder="Your email address"
-              component={UserInput}
-            />
-            <Field
-              label="Password"
-              name="password"
-              placeholder="Your password"
-              component={UserInput}
-            />
-            {error && <span>{error}</span>}
-            <button className="btn btn-primary">Register</button>
-          </form>
-        </div>
-      </div>
+    <div className="container register-form">
+      <form onSubmit={handleSubmit}>
+        <h1>Sign Up</h1>
+        <div className="divider"/>
+        <p>Start learning from various professional instructors here at edusesh.</p>
+        <Field
+          label="Email"
+          name="email"
+          placeholder="Your email address"
+          component={UserInput}
+        />
+        <Field
+          label="Password"
+          name="password"
+          placeholder="Your password"
+          component={UserInput}
+        />
+        {error && <span>{error}</span>}
+        <button className="btn btn-primary form-submit">Register</button>
+      </form>
     </div>
   )
 };

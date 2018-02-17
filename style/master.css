@@ -1,10 +1,12 @@
 html, body {
     padding: 0;
     margin: 0;
-    height: 100%;
+    background-color: #f8f9fa;
+    height: 100vh;
 }
 
-#root {
+#root, .subroot, .register-form{
+    height: 100%;
 }
 
 .navbar {
@@ -12,11 +14,12 @@ html, body {
     background: rgba(248, 249, 250, .65);
 }
 
-.register-page > input {
-    width: 420px;
-}
-
-.user-input {
+.register-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: -100px;
     width: 420px;
 }
 
@@ -27,3 +30,9 @@ html, body {
 .search-bar {
     width: 600px;
 }
+
+.form-submit {
+    margin-top: 16px;
+    float: right;
+}
+

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import style from "../../style/master.css";
 import spectre from "../../style/spectre.min.css";
+import style from "../../style/master.css";
 import Navbar from "../components/navbar"
 import {connect} from "react-redux";
 import RegisterPage from "./register-page"
@@ -19,7 +19,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <div className="subroot">
           <Navbar token={this.props.token}/>
           <Route path="/users/register" component={RegisterPage}/>
         </div>

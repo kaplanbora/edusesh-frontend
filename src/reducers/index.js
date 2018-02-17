@@ -28,7 +28,6 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case LOAD_CREDENTIALS:
       const credentials = action.payload.data;
