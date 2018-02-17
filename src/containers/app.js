@@ -4,6 +4,7 @@ import style from "../../style/master.css";
 import Navbar from "../components/navbar"
 import {connect} from "react-redux";
 import RegisterPage from "./register-page"
+import LoginPage from "./login-page"
 import {BrowserRouter, Route} from "react-router-dom";
 import {tokenFromCookie} from "../actions";
 
@@ -21,6 +22,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="subroot">
           <Navbar token={this.props.token}/>
+          <Route path="/users/login" component={LoginPage}/>
           <Route path="/users/register" component={RegisterPage}/>
         </div>
       </BrowserRouter>

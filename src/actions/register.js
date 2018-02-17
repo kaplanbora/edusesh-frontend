@@ -13,15 +13,29 @@ export const checkEmail = values => {
   }).catch(e => console.log("Error at email check: " + e.message))
 };
 
-const login = credentials => {
-  return axios.post(`${API_URL}/users/login`, {
+export const loginUser = values => {
+  const credentials = {
     email: values.email,
     password: values.password
-  }).then(response => {
-    return {
-      token: response.data.token
-    }
-  });
+  };
+
+  const request = axios.post(`${API_URL}/users/login`, credentials)
+    .then(response => {
+      console.log(response);
+      if (response.status !== 200) {
+        throw new SubmissionError({
+          _error: "No user found with these email and password."
+        })
+      }
+      return {
+        token: response.data.token
+      }
+    }).catch(e => console.log("Error at login: " + e.message));
+
+  return {
+    type: SET_TOKEN,
+    payload: request
+  };
 };
 
 const register = (values, role) => {
