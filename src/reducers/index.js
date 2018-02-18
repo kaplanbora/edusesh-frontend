@@ -1,12 +1,15 @@
 import Cookies from 'universal-cookie';
 import {combineReducers} from "redux";
-import {LOAD_CREDENTIALS, LOAD_PROFILE, LOAD_TOKEN, SET_TOKEN, SET_TOKEN_NO_COOKIE} from "../actions/types";
+import {
+  LOAD_CREDENTIALS, LOAD_PROFILE, LOAD_TOKEN, SET_TOKEN, SET_TOKEN_NO_COOKIE,
+  SUBMIT_ERROR
+} from "../actions/types";
 import {reducer as formReducer} from "redux-form";
 
 const tokenReducer = (state = null, action) => {
   switch (action.type) {
-		case SET_TOKEN_NO_COOKIE:
-			return action.payload;
+    case SET_TOKEN_NO_COOKIE:
+      return action.payload;
     case SET_TOKEN:
       if (action.payload) {
         const twoWeeksLater = Date.now() + (60 * 60 * 24 * 14 * 1000);
@@ -47,9 +50,24 @@ const userReducer = (state = initialState, action) => {
   return state;
 };
 
+const initialErrors = {
+  submit: null
+};
+
+const errorReducer = (state = initialErrors, action) => {
+  switch (action.type) {
+    case SUBMIT_ERROR:
+      return {
+        submit: action.payload
+      };
+  }
+  return state;
+};
+
 const eduseshReducers = combineReducers({
   user: userReducer,
   token: tokenReducer,
+  errors: errorReducer,
   form: formReducer
 });
 

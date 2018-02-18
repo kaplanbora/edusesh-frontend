@@ -1,4 +1,4 @@
-import {API_URL} from "./types";
+import {API_URL, SUBMIT_ERROR} from "./types";
 import axios from "axios";
 import {SubmissionError} from 'redux-form';
 import {SET_TOKEN, SET_TOKEN_NO_COOKIE} from "./types";
@@ -13,42 +13,28 @@ export const checkEmail = values => {
   }).catch(e => console.log("Error at email check: " + e.message))
 };
 
-export const loginUser = values => {
+export const loginUser = (values, dispatch) => {
   const credentials = {
     email: values.email,
     password: values.password
   };
 
-	const request = axios({
-		method: "post",
-		url: API_URL + "/users/login",
-		data: credentials,
-		validateStatus: status => true
-	}).then(response => {
-		if (response.status !== 200) {
-			throw new SubmissionError({
-				_error: "No user found with this email and password."
-			})
-		}
-		return response.data.token;
-	});
-
-	/*
-  const request = axios.post(`${API_URL}/users/login`, credentials)
-    .then(response => response.data.token)
-		.catch(error => {
-			if (error.response) {
-        throw new SubmissionError({
-          _error: "No user found with this email and password."
-        })
-			}
-		});
-		*/
-
-  return {
-		type: values.remember ? SET_TOKEN : SET_TOKEN_NO_COOKIE,
-    payload: request
-  };
+  return axios({
+    method: "post",
+    url: API_URL + "/users/login",
+    data: credentials,
+    validateStatus: null
+  }).then(response => {
+    dispatch({
+      type: values.remember ? SET_TOKEN : SET_TOKEN_NO_COOKIE,
+      payload: response.data.token
+    })
+  }).catch(error => {
+    dispatch({
+      type: SUBMIT_ERROR,
+      payload: "Wrong email or password."
+    })
+  });
 };
 
 const register = (values, role) => {
