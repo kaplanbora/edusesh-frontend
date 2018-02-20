@@ -1,7 +1,10 @@
-import {API_URL, SUBMIT_ERROR} from "./types";
+import {API_URL, ERR_SUBMIT, AUTH_LOGOUT, AUTH_SET_TOKEN, AUTH_SET_TOKEN_NO_COOKIE} from "./types";
 import axios from "axios";
 import {SubmissionError} from 'redux-form';
-import {SET_TOKEN, SET_TOKEN_NO_COOKIE} from "./types";
+
+export const logout = () => ({
+  type: AUTH_LOGOUT
+});
 
 export const checkEmail = values => {
   return axios.post(`${API_URL}/users/email`, {
@@ -26,12 +29,12 @@ export const loginUser = (values, dispatch) => {
     validateStatus: null
   }).then(response => {
     dispatch({
-      type: values.remember ? SET_TOKEN : SET_TOKEN_NO_COOKIE,
+      type: values.remember ? AUTH_SET_TOKEN : AUTH_SET_TOKEN_NO_COOKIE,
       payload: response.data.token
     })
   }).catch(error => {
     dispatch({
-      type: SUBMIT_ERROR,
+      type: ERR_SUBMIT,
       payload: "Wrong email or password."
     })
   });
@@ -55,7 +58,7 @@ const register = (values, role) => {
     .catch(e => console.log("Error at register: " + e.message));
 
   return {
-    type: SET_TOKEN,
+    type: AUTH_SET_TOKEN,
     payload: request
   };
 };

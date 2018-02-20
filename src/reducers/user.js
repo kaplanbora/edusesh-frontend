@@ -1,4 +1,4 @@
-import {LOGOUT, LOAD_PROFILE, LOAD_CREDENTIALS} from "../actions/types";
+import {AUTH_LOGOUT, LOAD_PROFILE, LOAD_CREDENTIALS} from "../actions/types";
 
 const initialState = {
   profile: {},
@@ -7,7 +7,7 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGOUT:
+    case AUTH_LOGOUT:
       return initialState;
 
     case LOAD_CREDENTIALS:

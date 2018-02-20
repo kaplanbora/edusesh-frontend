@@ -1,6 +1,6 @@
 import React from "react";
 import {reduxForm} from "redux-form";
-import {checkEmail} from "../actions/register";
+import {checkEmail} from "../actions/auth";
 import {CredentialsForm} from "./credentials-form";
 
 const RegisterForm = ({handleSubmit}) => {

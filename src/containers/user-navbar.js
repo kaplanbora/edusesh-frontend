@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import SearchBar from "./search-bar"
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {getCredentials, getProfile, logout} from "../actions/user";
+import {getCredentials, getProfile} from "../actions/load";
+import {logout} from "../actions/auth";
 import UserMenu from "../components/user-menu";
 
 class UserNavbar extends Component {

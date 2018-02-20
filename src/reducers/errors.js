@@ -1,4 +1,4 @@
-import {SUBMIT_ERROR} from "../actions/types";
+import {ERR_SUBMIT} from "../actions/types";
 
 const initialState = {
   submit: null
@@ -6,7 +6,7 @@ const initialState = {
 
 const errorReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SUBMIT_ERROR:
+    case ERR_SUBMIT:
       return {
         submit: action.payload
       };

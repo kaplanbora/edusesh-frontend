@@ -2,7 +2,7 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import RegisterForm from "../components/register-form";
-import {registerInstructor, registerTrainee} from "../actions/register";
+import {registerInstructor, registerTrainee} from "../actions/auth";
 
 let RegisterPage = ({registerTrainee, registerInstructor, token, location}) => {
   const role = location.search.slice(6);
