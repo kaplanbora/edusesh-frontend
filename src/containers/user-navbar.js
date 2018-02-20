@@ -3,6 +3,7 @@ import SearchBar from "./search-bar"
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {getCredentials, getProfile} from "../actions/user";
+import UserMenu from "../components/user-menu";
 
 class UserNavbar extends Component {
   constructor(props) {
@@ -27,12 +28,7 @@ class UserNavbar extends Component {
           <SearchBar/>
         </section>
         <section className="navbar-section">
-          <figure className="avatar badge" data-badge="8" data-initial="YZ">
-            <img alt={"AT"}
-                 src={profile.imageLink ? profile.imageLink :
-                   `https://robohash.org/${credentials.id}?set=set3`}
-            />
-          </figure>
+          <UserMenu profile={profile} credentials={credentials}/>
         </section>
       </header>
     )
