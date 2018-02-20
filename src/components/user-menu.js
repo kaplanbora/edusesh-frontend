@@ -19,16 +19,13 @@ const UserMenu = ({credentials, profile, notifications, onLogout}) => {
   return (
     <div className="columns">
       <div className="column col-4 col-xs-12">
-
         <div className="dropdown dropdown-right">
-          <figure className="avatar badge dropdown-toggle" tabIndex="0"
+          <figure className={`avatar dropdown-toggle ${notifications ? "badge" : ""}`} tabIndex="0"
                   data-badge={notifications ? notifications.length : 0}
                   data-initial={initials}>
             <img alt={initials} src={image}/>
           </figure>
-
           <ul className="menu">
-
             <li className="menu-item">
               <div className="tile tile-centered">
                 <div className="tile-icon">
@@ -39,14 +36,15 @@ const UserMenu = ({credentials, profile, notifications, onLogout}) => {
                 </div>
               </div>
             </li>
-
             <li className="divider"/>
-
             <li className="menu-item">
               <div className="menu-badge">
-                <label className="label label-primary">{notifications ? notifications.length : 0}</label>
+                {notifications
+                  ? <label className="label label-primary">{notifications ? notifications.length : ""}</label>
+                  : ""
+                }
               </div>
-              <Link to="/notifications" className="active">Notifications</Link>
+              <Link to="/notifications" className={notifications ? "active" : ""}>Notifications</Link>
             </li>
             <li className="menu-item">
               <Link to="/settings">Settings</Link>
@@ -55,7 +53,6 @@ const UserMenu = ({credentials, profile, notifications, onLogout}) => {
               <Link to="/" onClick={onLogout}>Logout</Link>
             </li>
           </ul>
-
         </div>
       </div>
     </div>
