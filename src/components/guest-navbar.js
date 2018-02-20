@@ -11,9 +11,9 @@ const GuestNavbar = () => (
       <SearchBar/>
     </section>
     <section className="navbar-section">
-      <Link to="/users/register?role=instructor" className="btn btn-link right-mg">Become an instructor</Link>
-      <Link to="/users/login" className="btn btn-primary right-mg">Login</Link>
-      <Link to="/users/register?role=trainee" className="btn btn-primary">Register</Link>
+      <Link to="/register?role=instructor" className="btn btn-link right-mg">Become an instructor</Link>
+      <Link to="/login" className="btn btn-primary right-mg">Login</Link>
+      <Link to="/register?role=trainee" className="btn btn-primary">Register</Link>
     </section>
   </header>
 );

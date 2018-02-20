@@ -1,13 +1,18 @@
 import Cookies from 'universal-cookie';
 import {combineReducers} from "redux";
 import {
-  LOAD_CREDENTIALS, LOAD_PROFILE, LOAD_TOKEN, SET_TOKEN, SET_TOKEN_NO_COOKIE,
+  LOAD_CREDENTIALS, LOAD_PROFILE, LOAD_TOKEN, LOGOUT, SET_TOKEN, SET_TOKEN_NO_COOKIE,
   SUBMIT_ERROR
 } from "../actions/types";
 import {reducer as formReducer} from "redux-form";
 
 const tokenReducer = (state = null, action) => {
   switch (action.type) {
+    case LOGOUT:
+      console.log("token");
+      const cookies = new Cookies();
+      cookies.remove("token");
+      return null;
     case SET_TOKEN_NO_COOKIE:
       return action.payload;
     case SET_TOKEN:
@@ -34,6 +39,8 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOGOUT:
+      return initialState;
     case LOAD_CREDENTIALS:
       const credentials = action.payload.data;
       return {

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import spectre from "../../style/spectre.min.css";
 import style from "../../style/master.css";
 import Navbar from "../components/navbar"
+import HomePage from "../containers/home-page"
 import {connect} from "react-redux";
 import RegisterPage from "./register-page"
 import LoginPage from "./login-page"
@@ -22,8 +23,9 @@ class App extends Component {
       <BrowserRouter>
         <div className="subroot">
           <Navbar token={this.props.token}/>
-          <Route path="/users/login" component={LoginPage}/>
-          <Route path="/users/register" component={RegisterPage}/>
+          <Route exact path="/" component={HomePage}/>
+          <Route path="/login" component={LoginPage}/>
+          <Route path="/register" component={RegisterPage}/>
         </div>
       </BrowserRouter>
     )

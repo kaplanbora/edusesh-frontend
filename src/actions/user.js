@@ -1,5 +1,9 @@
 import axios from "axios";
-import {API_URL, LOAD_CREDENTIALS, LOAD_PROFILE} from "./types";
+import {API_URL, LOAD_CREDENTIALS, LOAD_PROFILE, LOGOUT} from "./types";
+
+export const logout = () => ({
+  type: LOGOUT
+});
 
 export const getCredentials = token => ({
   type: LOAD_CREDENTIALS,

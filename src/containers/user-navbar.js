@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import SearchBar from "./search-bar"
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {getCredentials, getProfile} from "../actions/user";
+import {getCredentials, getProfile, logout} from "../actions/user";
 import UserMenu from "../components/user-menu";
 
 class UserNavbar extends Component {
@@ -28,7 +28,7 @@ class UserNavbar extends Component {
           <SearchBar/>
         </section>
         <section className="navbar-section">
-          <UserMenu profile={profile} credentials={credentials}/>
+          <UserMenu profile={profile} credentials={credentials} onLogout={this.props.onLogout}/>
         </section>
       </header>
     )
@@ -41,7 +41,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadCredentials: token => dispatch(getCredentials(token)),
-  loadProfile: token => dispatch(getProfile(token))
+  loadProfile: token => dispatch(getProfile(token)),
+  onLogout: () => dispatch(logout())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserNavbar)
