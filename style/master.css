@@ -2,11 +2,20 @@ html, body {
     padding: 0;
     margin: 0;
     background-color: #f8f9fa;
-    height: 100vh;
 }
 
-#root, .subroot, .register-form, .login-form {
-    height: 100%;
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.grower {
+    flex-grow: 1;
+}
+
+.full-height {
+    height: 100%
 }
 
 .navbar {
@@ -14,32 +23,18 @@ html, body {
     background: rgba(248, 249, 250, .65);
 }
 
-.register-form, .login-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    margin-top: -100px;
-    width: 420px;
-}
- 
-.login-form > form {
-	width: 420px;
-}
-
 .right-mg {
     margin-right: 12px;
 }
 
 .search-bar {
-    width: 600px;
-}
-
-.form-submit {
-    float: right;
+    width: 500px;
 }
 
 .my-3 {
 	margin: 16px 0 16px 0;
 }
 
+.mr-2 {
+    margin-right: 12px;
+}

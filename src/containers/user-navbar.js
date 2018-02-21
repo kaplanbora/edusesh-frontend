@@ -21,7 +21,7 @@ class UserNavbar extends Component {
     const credentials = this.props.user.credentials;
     const profile = this.props.user.profile;
     return (
-      <header className="navbar">
+      <header className="navbar p-2">
         <section className="navbar-section">
           <Link to="/" className="navbar-brand mr-2">Edusesh</Link>
         </section>

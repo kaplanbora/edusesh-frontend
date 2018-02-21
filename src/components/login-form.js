@@ -14,17 +14,19 @@ const RememberCheck = ({input}) => {
 
 const LoginForm = ({handleSubmit, submitError, submitting}) => {
   return (
-    <div className="container login-form">
-      <form onSubmit={handleSubmit}>
-        <h1>Sign In</h1>
-        <div className="divider"/>
-        <CredentialsForm/>
-        {submitError && <p className="my-2 text-error">{submitError}</p>}
-        <Field name="remember" component={RememberCheck}/>
-        <button className={`${submitting ? "loading" : ""} btn btn-primary float-right my-2`}
-                disabled={submitting}>Login
-        </button>
-      </form>
+      <div className="columns col-oneline grower">
+        <div className="column centered col-3 col-xl-4 col-lg-6 col-md-7 col-sm-10 col-xs-12">
+          <form onSubmit={handleSubmit}>
+            <h1>Sign In</h1>
+            <div className="divider"/>
+            <CredentialsForm/>
+            {submitError && <p className="my-2 text-error">{submitError}</p>}
+            <Field name="remember" component={RememberCheck}/>
+            <button className={`${submitting ? "loading" : ""} btn btn-primary float-right my-2`}
+                    disabled={submitting}>Login
+            </button>
+          </form>
+      </div>
     </div>
   );
 };
