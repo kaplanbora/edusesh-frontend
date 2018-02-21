@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBar from "../containers/search-bar"
 import {Link} from "react-router-dom";
+import LoginPage from "../containers/login-page"
 
 const GuestNavbar = () => (
   <header className="navbar p-2">
@@ -12,7 +13,7 @@ const GuestNavbar = () => (
     </section>
     <section className="navbar-section">
       <Link to="/register?role=instructor" className="btn btn-link mx-2">Become an instructor</Link>
-      <Link to="/login" className="btn btn-primary mx-2 mr-2">Login</Link>
+      <LoginPage/>
       <Link to="/register?role=trainee" className="btn btn-primary">Register</Link>
     </section>
   </header>
