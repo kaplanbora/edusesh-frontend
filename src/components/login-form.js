@@ -5,7 +5,7 @@ import {Field} from "redux-form";
 
 const RememberCheck = ({input}) => {
   return (
-    <label className="form-checkbox my-2">
+    <label className="form-checkbox mt-2 float-left">
       <input className="form-checkbox" {...input} type="checkbox"/>
       <i className="form-icon"/> Remember me
     </label>
@@ -22,7 +22,6 @@ const LoginForm = ({handleSubmit, submitError, submitting, modal, openModal, clo
         <div className="modal-container">
           <div className="modal-header">
             <a href="#" onClick={closeModal} className="btn btn-clear float-right" aria-label="Close"/>
-            <div className="modal-title h5">Login</div>
           </div>
 
           <div className="modal-body">
@@ -32,9 +31,9 @@ const LoginForm = ({handleSubmit, submitError, submitting, modal, openModal, clo
                 <h1>Sign In</h1>
                 <div className="divider"/>
                 <CredentialsForm/>
-                {submitError && <p className="my-2 text-error">{submitError}</p>}
+
                 <Field name="remember" component={RememberCheck}/>
-                <button className={`${submitting ? "loading" : ""} btn btn-primary float-right my-2`}
+                <button className={`${submitting ? "loading" : ""} btn btn-primary float-right mt-3`}
                         disabled={submitting}>Login
                 </button>
               </form>
@@ -43,6 +42,9 @@ const LoginForm = ({handleSubmit, submitError, submitting, modal, openModal, clo
             </div>
           </div>
 
+          <div className="modal-footer">
+            {submitError && <div className="my-2 toast toast-error">{submitError}</div>}
+          </div>
         </div>
       </div>
     </div>

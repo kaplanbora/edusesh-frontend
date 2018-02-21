@@ -1,4 +1,4 @@
-import {API_URL, ERR_SUBMIT, AUTH_LOGOUT, AUTH_SET_TOKEN, AUTH_SET_TOKEN_NO_COOKIE} from "./types";
+import {API_URL, ERR_SUBMIT, AUTH_LOGOUT, AUTH_SET_TOKEN, AUTH_SET_TOKEN_NO_COOKIE, CLEAR_ERROR} from "./types";
 import axios from "axios";
 import {SubmissionError} from 'redux-form';
 
@@ -17,6 +17,11 @@ export const checkEmail = values => {
 };
 
 export const loginUser = (values, dispatch) => {
+  dispatch({
+    type: CLEAR_ERROR,
+    payload: "submit"
+  });
+
   const credentials = {
     email: values.email,
     password: values.password
@@ -25,8 +30,7 @@ export const loginUser = (values, dispatch) => {
   return axios({
     method: "post",
     url: API_URL + "/users/login",
-    data: credentials,
-    validateStatus: null
+    data: credentials
   }).then(response => {
     dispatch({
       type: values.remember ? AUTH_SET_TOKEN : AUTH_SET_TOKEN_NO_COOKIE,
@@ -35,7 +39,7 @@ export const loginUser = (values, dispatch) => {
   }).catch(error => {
     dispatch({
       type: ERR_SUBMIT,
-      payload: "Wrong email or password."
+      payload: error.message === "Network Error" ? "Connection error." : "Wrong email or password."
     })
   });
 };
