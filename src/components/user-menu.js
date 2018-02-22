@@ -44,10 +44,10 @@ const UserMenu = ({credentials, profile, notifications, onLogout}) => {
                   : ""
                 }
               </div>
-              <Link to="/notifications" className={notifications ? "active" : ""}>Notifications</Link>
+              <Link to="/user/notifications" className={notifications ? "active" : ""}>Notifications</Link>
             </li>
             <li className="menu-item">
-              <Link to="/settings">Settings</Link>
+              <Link to="/user/profile">Profile</Link>
             </li>
             <li className="menu-item">
               <Link to="/" onClick={onLogout}>Logout</Link>

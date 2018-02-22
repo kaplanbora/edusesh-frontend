@@ -5,7 +5,7 @@ import Navbar from "../components/navbar"
 import HomePage from "../containers/home-page"
 import {connect} from "react-redux";
 import RegisterPage from "./register-page"
-import SettingsPage from "./settings-page"
+import SettingsPage from "./user-profile"
 import LoginPage from "./login-page"
 import {BrowserRouter, Route} from "react-router-dom";
 import {tokenFromCookie} from "../actions";
@@ -26,7 +26,7 @@ class App extends Component {
           <Navbar token={this.props.token}/>
           <Route exact path="/" component={HomePage}/>
           <Route path="/register" component={RegisterPage}/>
-          <Route path="/settings" component={SettingsPage}/>
+          <Route path="/user/profile" component={SettingsPage}/>
         </div>
       </BrowserRouter>
     )

@@ -20,7 +20,8 @@ html, body {
 
 .navbar {
     padding: 12px;
-    background: rgba(248, 249, 250, .65);
+    /*background: rgba(248, 249, 250, .65);*/
+    background-color: white;
 }
 
 .right-mg {
@@ -41,5 +42,11 @@ html, body {
 
 .toast-error {
     text-align: center;
+}
+
+.profile-sections {
+    background-color: white;
+    left: 0;
+    bottom: 0;
 }
 
