@@ -1,5 +1,5 @@
 import React from "react";
-import ProfileSections from "./ProfileSections";
+import ProfileSections from "./profile-sections";
 import {CHANGE_SECTION} from "../actions/types";
 import {connect} from "react-redux";
 

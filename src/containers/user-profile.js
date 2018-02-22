@@ -19,11 +19,4 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-/*
-const mapDispatchToProps = dispatch => ({
-  loadCredentials: token => dispatch(getCredentials(token)),
-  loadProfile: token => dispatch(getProfile(token))
-});
-*/
-
 export default connect(mapStateToProps, null)(UserProfile)
