@@ -12,7 +12,7 @@ const RememberCheck = ({input}) => {
   );
 };
 
-const LoginForm = ({handleSubmit, submitError, submitting, modal, openModal, closeModal}) => {
+const LoginForm = ({clear, handleSubmit, submitError, submitting, modal, openModal, closeModal}) => {
   return (
     <div>
       <button className="btn btn-primary mx-2" onClick={openModal}>Login</button>
@@ -43,7 +43,11 @@ const LoginForm = ({handleSubmit, submitError, submitting, modal, openModal, clo
           </div>
 
           <div className="modal-footer">
-            {submitError && <div className="my-2 toast toast-error">{submitError}</div>}
+            {submitError &&
+            <div className="my-2 toast toast-error">
+              <button className="btn btn-clear float-right" onClick={clear}/>
+              {submitError}
+            </div>}
           </div>
         </div>
       </div>
