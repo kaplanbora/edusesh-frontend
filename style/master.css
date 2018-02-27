@@ -50,3 +50,9 @@ html, body {
     bottom: 0;
 }
 
+.section-item {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #5b657a !important;
+    font-size: smaller;
+}

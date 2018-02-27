@@ -47,7 +47,7 @@ const UserMenu = ({credentials, profile, notifications, onLogout}) => {
               <Link to="/user/notifications" className={notifications ? "active" : ""}>Notifications</Link>
             </li>
             <li className="menu-item">
-              <Link to="/user/profile">Profile</Link>
+              <Link to="/user">Profile</Link>
             </li>
             <li className="menu-item">
               <Link to="/" onClick={onLogout}>Logout</Link>

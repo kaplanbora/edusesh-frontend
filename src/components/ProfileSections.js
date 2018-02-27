@@ -1,19 +1,18 @@
 import React from "react";
-import {Link} from "react-router-dom";
 
-const ProfileSections = ({section}) => {
+const ProfileSections = ({changeSection}) => {
   return (
     <div className="column col-2 profile-sections centered py-2">
       <h4 className="mx-2">Account Settings</h4>
       <ul className="nav">
-        <li className={`nav-item ${section === "profile" ? "active" : ""}`}>
-          <Link to="/user/profile">Profile</Link>
+        <li className={`nav-item `}>
+          <label className="btn btn-link section-item" onClick={() => changeSection("profile")}>Profile</label>
         </li>
         <li className="nav-item">
-          <Link to="/user/credentials" className={section === "credentials" ? "active" : ""}>Credentials</Link>
+          <label className="btn btn-link section-item" onClick={() => changeSection("credentials")}>Credentials</label>
         </li>
         <li className="nav-item">
-          <Link to="/user/session" className={section === "session" ? "active" : ""}>Live Sessions</Link>
+          <label className="btn btn-link section-item" onClick={() => changeSection("session")}>Live Sessions</label>
         </li>
       </ul>
     </div>
