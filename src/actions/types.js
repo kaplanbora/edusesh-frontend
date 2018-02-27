@@ -1,7 +1,10 @@
 export const API_URL = "http://localhost:9000";
 
+export const EDIT_SESSION_SETTINGS = "EDIT_SESSION_SETTINGS";
+export const EDIT_PROFILE = "EDIT_PROFILE";
+export const EDIT_CREDENTIALS = "EDIT_CREDENTIALS";
 export const ERR_SUBMIT = "ERR_SUBMIT";
-export const CLEAR_ERROR = "CLEAR_ERROR";
+export const ERR_CLEAR = "ERR_CLEAR";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 export const AUTH_SET_TOKEN = "AUTH_SET_TOKEN";
 export const AUTH_SET_TOKEN_NO_COOKIE = "AUTH_SET_TOKEN_NO_COOKIE";

@@ -34,8 +34,8 @@ const validate = inputs => {
 
 export default reduxForm({
   validate,
-  asyncValidate: checkEmail,
   asyncBlurFields: ["email"],
+  asyncValidate: checkEmail,
   form: "registerForm"
 })(RegisterForm);
 

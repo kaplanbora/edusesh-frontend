@@ -1,4 +1,4 @@
-import {API_URL, ERR_SUBMIT, AUTH_LOGOUT, AUTH_SET_TOKEN, AUTH_SET_TOKEN_NO_COOKIE, CLEAR_ERROR} from "./types";
+import {API_URL, ERR_SUBMIT, AUTH_LOGOUT, AUTH_SET_TOKEN, AUTH_SET_TOKEN_NO_COOKIE, ERR_CLEAR} from "./types";
 import axios from "axios";
 import {SubmissionError} from 'redux-form';
 
@@ -13,12 +13,12 @@ export const checkEmail = values => {
     if (response.data.emailExists) {
       throw {email: "This email address is taken."}
     }
-  }).catch(e => console.log("Error at email check: " + e.message))
+  })
 };
 
 export const loginUser = (values, dispatch) => {
   dispatch({
-    type: CLEAR_ERROR,
+    type: ERR_CLEAR,
     payload: "submit"
   });
 

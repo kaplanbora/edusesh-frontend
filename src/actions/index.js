@@ -1,8 +1,8 @@
 import Cookies from 'universal-cookie';
-import {CLEAR_ERROR, LOAD_TOKEN} from "./types";
+import {ERR_CLEAR, LOAD_TOKEN} from "./types";
 
 export const clearError = errorName => ({
-  type: CLEAR_ERROR,
+  type: ERR_CLEAR,
   payload: errorName
 });
 

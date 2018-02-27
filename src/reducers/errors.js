@@ -1,4 +1,4 @@
-import {CLEAR_ERROR, ERR_SUBMIT} from "../actions/types";
+import {ERR_CLEAR, ERR_SUBMIT} from "../actions/types";
 
 const initialState = {
   submit: null
@@ -10,7 +10,7 @@ const errorReducer = (state = initialState, action) => {
       return {
         submit: action.payload
       };
-    case CLEAR_ERROR:
+    case ERR_CLEAR:
       if (action.payload === "submit") {
         return initialState;
       } else {

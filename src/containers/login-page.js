@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {loginUser} from "../actions/auth";
 import LoginForm from "../components/login-form"
 import {clearError} from "../actions";
-import {CLEAR_ERROR, MODAL_CLOSE_LOGIN, MODAL_OPEN_LOGIN} from "../actions/types";
+import {ERR_CLEAR, MODAL_CLOSE_LOGIN, MODAL_OPEN_LOGIN} from "../actions/types";
 
 let LoginPage = ({login, token, submitError, modal, clear, openModal, closeModal}) =>
   token

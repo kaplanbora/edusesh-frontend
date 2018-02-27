@@ -2,7 +2,7 @@ import React from "react";
 
 const ProfileSections = ({changeSection}) => {
   return (
-    <div className="column col-2 profile-sections centered py-2">
+    <div className="column col-2 profile-sections py-2">
       <h4 className="mx-2">Account Settings</h4>
       <ul className="nav">
         <li className={`nav-item `}>

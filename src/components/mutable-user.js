@@ -5,12 +5,20 @@ import {connect} from "react-redux";
 import MutableProfile from "./mutable-profile";
 import MutableCredentials from "./mutable-credentials";
 import MutableSession from "./mutable-session";
+import {saveCredentials} from "../actions/edit";
 
-const MutableUser = ({section, changeSection}) => {
+const MutableUser = ({section, changeSection, user, token}) => {
+
   let renderSection;
   switch (section) {
     case "credentials":
-      renderSection = <MutableCredentials/>;
+      renderSection =
+        <MutableCredentials
+          initialValues={{email: user.credentials.email}}
+          credentials={user.credentials}
+          onSubmit={saveCredentials}
+          token={token}
+        />;
       break;
     case "session":
       renderSection = <MutableSession/>;
@@ -21,7 +29,7 @@ const MutableUser = ({section, changeSection}) => {
   return (
     <div className="columns full-height">
       <ProfileSections changeSection={changeSection}/>
-      <div className="column col-10 profile-forms">
+      <div className="column col-4 col-mr-auto profile-forms p-2">
         {renderSection}
       </div>
     </div>
@@ -29,14 +37,17 @@ const MutableUser = ({section, changeSection}) => {
 };
 
 const mapStateToProps = state => ({
-  section: state.section
+  section: state.section,
+  user: state.user,
+  token: state.token
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   changeSection: section => dispatch({
     type: CHANGE_SECTION,
     payload: section
-  })
+  }),
+  saveCredentials: credentials => saveCredentials(credentials, ownProps.token, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MutableUser)
