@@ -1,12 +1,12 @@
 import React from "react";
-import {BrowserRouter, Route, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import MutableUser from "../components/mutable-user"
+import MutableProfile from "../components/mutable-profile"
 
-const SettingsPage = ({match, token, location}) => {
+const UserProfile = ({token, location, user}) => {
   const id = location.search.slice(4);
   if (token && !id) {
-    return <MutableUser/>
+    return <MutableProfile user={user}/>;
   } else if (id) {
     return <PublicProfile/>;
   } else {
@@ -26,4 +26,4 @@ const mapDispatchToProps = dispatch => ({
 });
 */
 
-export default connect(mapStateToProps, null)(SettingsPage)
+export default connect(mapStateToProps, null)(UserProfile)
