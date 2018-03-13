@@ -18,7 +18,7 @@ const getWithToken = (token, route) => {
     headers: {"JWT": token}
   }).then(response => {
     if (response.status !== 200) {
-      throw new Error("Error at get with token.")
+      throw new Error("Info at get with token.")
     }
     return response
   }).catch(error => console.log(error.message));

@@ -39,7 +39,7 @@ export const loginUser = (values, dispatch) => {
   }).catch(error => {
     dispatch({
       type: ERR_SUBMIT,
-      payload: error.message === "Network Error" ? "Connection error." : "Wrong email or password."
+      payload: error.message === "Network Info" ? "Connection error." : "Wrong email or password."
     })
   });
 };
@@ -59,7 +59,7 @@ const register = (values, role) => {
       }
       return response.data.token;
     })
-    .catch(e => console.log("Error at register: " + e.message));
+    .catch(e => console.log("Info at register: " + e.message));
 
   return {
     type: AUTH_SET_TOKEN,

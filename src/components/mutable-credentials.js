@@ -2,13 +2,15 @@ import React from "react";
 import {CredentialsForm} from "../components/credentials-form"
 import {reduxForm} from "redux-form";
 import {checkEmail} from "../actions/auth";
+import Info from "./info";
 
-const MutableCredentials = ({handleSubmit, submitting}) => {
+const MutableCredentials = ({handleSubmit, submitting, submitSucceeded}) => {
   return (
     <form onSubmit={handleSubmit} className="p-2">
       <h4>Credentials</h4>
       <div className="divider"/>
       <CredentialsForm/>
+      {submitSucceeded && <Info message="User credentials saved successfully." status={"success"}/>}
       <button
         className={`${submitting ? "loading" : ""} btn btn-primary float-right mt-3`}
         disabled={submitting}> Save

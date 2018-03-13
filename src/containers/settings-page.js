@@ -1,7 +1,7 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import MutableUser from "../components/mutable-user"
+import MutableUser from "./mutable-user"
 
 const UserProfile = ({token, location, user, section}) => {
   const id = location.search.slice(4);
