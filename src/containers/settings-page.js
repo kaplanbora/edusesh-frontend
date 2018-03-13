@@ -1,12 +1,12 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import MutableProfile from "../components/mutable-profile"
+import MutableUser from "../components/mutable-user"
 
-const UserProfile = ({token, location, user}) => {
+const UserProfile = ({token, location, user, section}) => {
   const id = location.search.slice(4);
   if (token && !id) {
-    return <MutableProfile user={user}/>;
+    return <MutableUser token={token} user={user} section={section}/>;
   } else if (id) {
     return <PublicProfile/>;
   } else {
@@ -16,7 +16,8 @@ const UserProfile = ({token, location, user}) => {
 
 const mapStateToProps = state => ({
   token: state.token,
-  user: state.user
+  user: state.user,
+  section: state.section
 });
 
 /*

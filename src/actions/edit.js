@@ -1,10 +1,7 @@
 import {API_URL, ERR_CLEAR, EDIT_CREDENTIALS, ERR_SUBMIT} from "./types";
 import axios from "axios";
 
-export const saveCredentials = (credentials, token, dispatch) => {
-  // console.log(dispatch);
-  // console.log(token);
-  // console.log(credentials);
+export const saveCredentials = (credentials, props, dispatch) => {
   dispatch({
     type: ERR_CLEAR,
     payload: "submit"
@@ -14,7 +11,7 @@ export const saveCredentials = (credentials, token, dispatch) => {
     method: "put",
     url: API_URL + "/users/credentials",
     data: credentials,
-    headers: {JWT: token}
+    headers: {JWT: props.token}
   }).then(response => {
     dispatch({
       type: EDIT_CREDENTIALS,
@@ -23,7 +20,7 @@ export const saveCredentials = (credentials, token, dispatch) => {
   }).catch(error => {
     dispatch({
       type: ERR_SUBMIT,
-      payload: error.message === "Network Error" ? "Connection error." : "Error while changing credentials."
+      payload: error.message === "Network Info" ? "Connection error." : "Info while changing credentials."
     })
   });
 };
