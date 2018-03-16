@@ -2,7 +2,7 @@ import {API_URL, ERR_CLEAR, EDIT_CREDENTIALS, ERR_SUBMIT} from "./types";
 import axios from "axios";
 import {SubmissionError} from 'redux-form';
 
-export const saveCredentials = (credentials, props, dispatch) => {
+export const saveCredentials = (credentials, token, dispatch) => {
   dispatch({
     type: ERR_CLEAR,
     payload: "submit"
@@ -12,7 +12,7 @@ export const saveCredentials = (credentials, props, dispatch) => {
     method: "put",
     url: API_URL + "/users/credentials",
     data: credentials,
-    headers: {JWT: props.token}
+    headers: {JWT: token}
   }).then(response => {
     dispatch({
       type: EDIT_CREDENTIALS,
@@ -26,15 +26,15 @@ export const saveCredentials = (credentials, props, dispatch) => {
   });
 };
 
-const postTraineeProfile = (image, values) => {
+const postTraineeProfile = (image, values, token) => {
   return axios.put(API_URL + "/users/profile", {
     firstName: values.firstName,
     lastName: values.lastName,
     imageLink: image.secure_url
-  })
+  }, {headers: {"JWT": token}})
 };
 
-export const saveTraineeProfile = (values, dispatch) => {
+const uploadImage = (image, token, dispatch) => {
   const url = "https://api.cloudinary.com/v1_1/edusesh/image/upload";
   const form = new FormData();
   form.append("image", values.photo);
@@ -46,6 +46,7 @@ export const saveTraineeProfile = (values, dispatch) => {
         _error: "Something went wrong on user creation.",
       });
     }
+    console.log(response);
     return response.data;
   }).then(image => postTraineeProfile(image, values))
     .catch(error =>
@@ -54,4 +55,11 @@ export const saveTraineeProfile = (values, dispatch) => {
         payload: error.message === "Network Error" ? "Connection error." : "Error while changing credentials."
       })
     )
+};
+
+export const saveTraineeProfile = (values, token, dispatch) => {
+  return axios.put(API_URL + "/users/profile", {
+    firstName: values.firstName,
+    lastName: values.lastName
+  }, {headers: {"JWT": token}})
 };
