@@ -63,3 +63,15 @@ export const saveTraineeProfile = (values, token, dispatch) => {
     lastName: values.lastName
   }, {headers: {"JWT": token}})
 };
+
+export const saveInstructorProfile = (values, token, dispatch) => {
+  console.log(values);
+  return axios.put(API_URL + "/users/profile", {
+    firstName: values.firstName,
+    lastName: values.lastName,
+    occupation: values.occupation,
+    hourlyRate: parseFloat(values.hourlyRate),
+    description: values.description
+  }, {headers: {"JWT": token}})
+    .catch(error => console.log(error))
+};

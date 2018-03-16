@@ -5,10 +5,10 @@ import {connect} from "react-redux";
 import MutableTraineeProfile from "../components/mutable-trainee-profile";
 import MutableCredentials from "../components/mutable-credentials";
 import MutableSession from "../components/mutable-session";
-import {saveCredentials, saveTraineeProfile} from "../actions/edit";
+import {saveCredentials, saveInstructorProfile, saveTraineeProfile} from "../actions/edit";
 import MutableInstructorProfile from "../components/mutable-instructor-profile";
 
-const MutableUser = ({section, changeSection, user, submitCred, submitProf}) => {
+const MutableUser = ({section, changeSection, user, submitCred, submitTrainee, submitInstructor}) => {
   let renderSection;
   switch (section) {
     case "credentials":
@@ -24,12 +24,21 @@ const MutableUser = ({section, changeSection, user, submitCred, submitProf}) => 
     default:
       renderSection = user.credentials.userRole === "trainee" ?
         <MutableTraineeProfile
-          onSubmit={submitProf}
+          onSubmit={submitTrainee}
           initialValues={{
             firstName: user.profile.firstName,
             lastName: user.profile.lastName
           }}/> :
-        <MutableInstructorProfile/>;
+        <MutableInstructorProfile
+          onSubmit={submitInstructor}
+          initialValues={{
+            firstName: user.profile.firstName,
+            lastName: user.profile.lastName,
+            occupation: user.profile.occupation,
+            description: user.profile.description,
+            hourlyRate: user.profile.hourlyRate,
+          }}
+        />;
   }
 
   return (
@@ -48,7 +57,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     payload: section
   }),
   submitCred: credentials => saveCredentials(credentials, ownProps.token, dispatch),
-  submitProf: values => saveTraineeProfile(values, ownProps.token, dispatch)
+  submitTrainee: values => saveTraineeProfile(values, ownProps.token, dispatch),
+  submitInstructor: values => saveInstructorProfile(values, ownProps.token, dispatch)
 });
 
 export default connect(null, mapDispatchToProps)(MutableUser)
