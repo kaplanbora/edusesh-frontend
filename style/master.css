@@ -60,3 +60,23 @@ html, body {
     color: #5b657a !important;
     font-size: smaller;
 }
+
+.center-inside > * {
+    text-align: center;
+    display: block;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.white-bg {
+    background-color: white;
+}
+
+.p-4 {
+    padding: 64px;
+}
+
+.p-5 {
+    padding: 36px 128px 36px 128px;
+}

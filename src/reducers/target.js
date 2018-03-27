@@ -1,8 +1,8 @@
 import {LOAD_TARGET_CREDENTIALS, LOAD_TARGET_PROFILE, LOAD_TARGET_TOPICS} from "../actions/types";
 
 const initialState = {
-  profile: {},
-  credentials: {},
+  profile: null,
+  credentials: null,
   topics: []
 };
 

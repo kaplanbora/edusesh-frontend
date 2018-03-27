@@ -4,11 +4,11 @@ import {reduxForm} from "redux-form";
 import UserInput from "./user-input";
 import Info from "./info";
 
-const TextArea = ({label, placeholder}) => {
+const TextArea = ({input, label, placeholder}) => {
   return (
     <div className="form-group">
       <label className="form-label">{label}</label>
-      <textarea className="form-input" placeholder={placeholder} rows="3"/>
+      <textarea className="form-input" placeholder={placeholder} rows="3" {...input}/>
     </div>
   );
 };
