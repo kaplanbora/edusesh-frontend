@@ -6,7 +6,7 @@ import HomePage from "../containers/home-page"
 import {connect} from "react-redux";
 import RegisterPage from "./register-page"
 import SettingsPage from "./settings-page"
-import LoginPage from "./login-page"
+import PublicUser from "./public-user";
 import {BrowserRouter, Route} from "react-router-dom";
 import {tokenFromCookie} from "../actions";
 
@@ -26,7 +26,8 @@ class App extends Component {
           <Navbar token={this.props.token}/>
           <Route exact path="/" component={HomePage}/>
           <Route path="/register" component={RegisterPage}/>
-          <Route path="/user" component={SettingsPage}/>
+          <Route exact path="/user" component={SettingsPage}/>
+          <Route path="/user/:id" component={PublicUser}/>
         </div>
       </BrowserRouter>
     )
@@ -38,9 +39,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadToken: () => {
-    dispatch(tokenFromCookie())
-  }
+  loadToken: () => dispatch(tokenFromCookie())
 });
 
 

@@ -1,5 +1,24 @@
 import axios from "axios";
-import {API_URL, LOAD_CREDENTIALS, LOAD_MAIN_TOPICS, LOAD_PROFILE, LOAD_SELF_TOPICS, LOAD_USER_TOPICS} from "./types";
+import {
+  API_URL, LOAD_CREDENTIALS, LOAD_MAIN_TOPICS, LOAD_PROFILE, LOAD_SELF_TOPICS, LOAD_TARGET_CREDENTIALS,
+  LOAD_TARGET_PROFILE,
+  LOAD_TARGET_TOPICS,
+} from "./types";
+
+export const getTargetTopics = userId => ({
+  type: LOAD_TARGET_TOPICS,
+  payload: getWithoutToken(`/users/${userId}/topics`)
+});
+
+export const getTargetCredentials = userId => ({
+  type: LOAD_TARGET_CREDENTIALS,
+  payload: getWithoutToken(`/users/${userId}/credentials`)
+});
+
+export const getTargetProfile = userId => ({
+  type: LOAD_TARGET_PROFILE,
+  payload: getWithoutToken(`/users/${userId}/profile`)
+});
 
 export const getMainTopics = () => ({
   type: LOAD_MAIN_TOPICS,
@@ -9,11 +28,6 @@ export const getMainTopics = () => ({
 export const getSelfTopics = token => ({
   type: LOAD_SELF_TOPICS,
   payload: getWithToken(token, "/users/topics")
-});
-
-export const getUsersTopics = userId => ({
-  type: LOAD_USER_TOPICS,
-  payload: getWithoutToken(`/users/${userId}/topics`)
 });
 
 export const getCredentials = token => ({

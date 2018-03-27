@@ -8,7 +8,7 @@ import MutableCredentials from "../components/mutable-credentials";
 import MutableSession from "../components/mutable-session";
 import {saveCredentials, saveInstructorProfile, saveTraineeProfile} from "../actions/edit";
 import MutableInstructorProfile from "../components/mutable-instructor-profile";
-import {getMainTopics, getSelfTopics, getUsersTopics} from "../actions/load";
+import {getMainTopics, getSelfTopics} from "../actions/load";
 import {addUserTopic} from "../actions/topics";
 
 const MutableUser = ({addTopic, token, topics, section, changeSection, user, submitCred, submitTrainee, submitInstructor, loadMainTopics, loadUsersTopics, loadSelfTopics}) => {
@@ -76,7 +76,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   submitInstructor: values => saveInstructorProfile(values, ownProps.token, dispatch),
   loadMainTopics: () => dispatch(getMainTopics()),
   loadSelfTopics: () => dispatch(getSelfTopics(ownProps.token)),
-  loadUsersTopics: () => dispatch(getUsersTopics(ownProps.user.credentials.id)),
   addTopic: values => addUserTopic(values, ownProps.token, dispatch),
 });
 
