@@ -8,10 +8,10 @@ import MutableCredentials from "../components/mutable-credentials";
 import MutableSession from "../components/mutable-session";
 import {saveCredentials, saveInstructorProfile, saveTraineeProfile} from "../actions/edit";
 import MutableInstructorProfile from "../components/mutable-instructor-profile";
-import {getMainTopics, getUsersTopics} from "../actions/load";
+import {getMainTopics, getSelfTopics, getUsersTopics} from "../actions/load";
 import {addUserTopic} from "../actions/topics";
 
-const MutableUser = ({addTopic, token, topics, section, changeSection, user, submitCred, submitTrainee, submitInstructor, loadMainTopics, loadUsersTopics}) => {
+const MutableUser = ({addTopic, token, topics, section, changeSection, user, submitCred, submitTrainee, submitInstructor, loadMainTopics, loadUsersTopics, loadSelfTopics}) => {
   let renderSection;
   switch (section) {
     case "credentials":
@@ -28,6 +28,7 @@ const MutableUser = ({addTopic, token, topics, section, changeSection, user, sub
       renderSection = <MutableInstructorTopics
         loadUsersTopics={loadUsersTopics}
         loadMainTopics={loadMainTopics}
+        loadSelfTopics={loadSelfTopics}
         topics={topics}
         token={token}
         userTopics={user.topics}
@@ -74,6 +75,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   submitTrainee: values => saveTraineeProfile(values, ownProps.token, dispatch),
   submitInstructor: values => saveInstructorProfile(values, ownProps.token, dispatch),
   loadMainTopics: () => dispatch(getMainTopics()),
+  loadSelfTopics: () => dispatch(getSelfTopics(ownProps.token)),
   loadUsersTopics: () => dispatch(getUsersTopics(ownProps.user.credentials.id)),
   addTopic: values => addUserTopic(values, ownProps.token, dispatch),
 });

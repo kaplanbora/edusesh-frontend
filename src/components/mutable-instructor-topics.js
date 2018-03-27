@@ -12,16 +12,23 @@ class MutableInstructorTopics extends Component {
     super(props)
   }
 
-  removeUserToken(id, token) {
-    this.props.dispatch({
-      type: REMOVE_USER_TOPIC,
-      payload: deleteWithToken(token, "/users/topics/" + id)
-    })
+  removeUserToken(id) {
+    deleteWithToken(this.props.token, "/users/topics/" + id)
+      .then(response => {
+        console.log(response);
+        if (response.data) {
+          this.props.dispatch({
+            type: REMOVE_USER_TOPIC,
+            payload: id
+          })
+        }
+        return response;
+      })
   }
 
   componentDidMount() {
     this.props.loadMainTopics();
-    this.props.loadUsersTopics();
+    this.props.loadSelfTopics();
   }
 
   render() {
@@ -42,7 +49,8 @@ class MutableInstructorTopics extends Component {
         {this.props.userTopics.map(topic =>
           <span className="chip" key={topic.id}>
             {topic.name}
-            <button className="btn btn-clear" aria-label="Close" role="button" onClick={() => this.removeUserToken(topic.id, this.props.token)}/>
+            <span className="btn btn-clear" aria-label="Close" role="button"
+                  onClick={() => this.removeUserToken(topic.id)}/>
           </span>
         )}
       </form>

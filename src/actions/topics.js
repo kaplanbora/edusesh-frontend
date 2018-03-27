@@ -8,11 +8,11 @@ const postWithToken = (token, route, data) => {
     headers: {"JWT": token},
     data: data
   }).then(response => {
-    if (response.status !== 201) {
+    if (!(response.status !== 201 || response.status !== 200)) {
       throw new Error("Error at post with token.")
     }
     return response
-  }).catch(error => console.log(error.message));
+  }).catch(error => console.log(error));
 };
 
 export const deleteWithToken = (token, route) => {
@@ -26,17 +26,19 @@ export const deleteWithToken = (token, route) => {
 export const addUserTopic = (values, token, dispatch) => {
   const userTopic = {
     name: values.name,
-    parentId: values.parentId
+    parentId: parseInt(values.parentId)
   };
   return postWithToken(token, "/users/topics", userTopic)
-    .then(response => dispatch({
-        type: ADD_USER_TOPIC,
-        payload: {
-          id: response.data.id,
-          name: values.name,
-          parentId: values.parentId
-        }
-      })
+    .then(response => {
+      dispatch({
+          type: ADD_USER_TOPIC,
+          payload: {
+            id: response.data.id,
+            name: values.name,
+            parentId: parseInt(values.parentId)
+          }
+        })
+      }
     )
 };
 
