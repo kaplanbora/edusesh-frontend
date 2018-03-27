@@ -1,8 +1,9 @@
-import {AUTH_LOGOUT, LOAD_PROFILE, LOAD_CREDENTIALS} from "../actions/types";
+import {AUTH_LOGOUT, LOAD_PROFILE, LOAD_CREDENTIALS, LOAD_USER_TOPICS, ADD_USER_TOPIC} from "../actions/types";
 
 const initialState = {
   profile: {},
-  credentials: {}
+  credentials: {},
+  topics: []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -14,14 +15,30 @@ const userReducer = (state = initialState, action) => {
       const credentials = action.payload.data;
       return {
         profile: state.profile,
-        credentials
+        credentials,
+        topics: state.topics
       };
 
     case LOAD_PROFILE:
       const profile = action.payload.data;
       return {
         profile,
-        credentials: state.credentials
+        credentials: state.credentials,
+        topics: state.topics
+      };
+
+    case LOAD_USER_TOPICS:
+      return {
+        profile: state.profile,
+        credentials: state.credentials,
+        topics: action.payload.data
+      };
+
+    case ADD_USER_TOPIC:
+      return {
+        profile: state.profile,
+        credentials: state.credentials,
+        topics: [...state.topics, action.payload]
       };
 
     default:

@@ -65,7 +65,6 @@ export const saveTraineeProfile = (values, token, dispatch) => {
 };
 
 export const saveInstructorProfile = (values, token, dispatch) => {
-  console.log(values);
   return axios.put(API_URL + "/users/profile", {
     firstName: values.firstName,
     lastName: values.lastName,

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProfileSections = ({changeSection}) => {
+const ProfileSections = ({changeSection, role}) => {
   return (
     <div className="column col-2 profile-sections py-2">
       <h4 className="mx-2">Account Settings</h4>
@@ -14,6 +14,11 @@ const ProfileSections = ({changeSection}) => {
         <li className="nav-item">
           <label className="btn btn-link section-item" onClick={() => changeSection("session")}>Live Sessions</label>
         </li>
+        {role === "instructor" &&
+        <li className="nav-item">
+          <label className="btn btn-link section-item" onClick={() => changeSection("topics")}>Topics</label>
+        </li>
+        }
       </ul>
     </div>
   );

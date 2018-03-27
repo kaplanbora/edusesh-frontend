@@ -32,6 +32,10 @@ html, body {
     width: 500px;
 }
 
+.mt-4 {
+    margin-top: 64px;
+}
+
 .mt-3 {
     margin-top: 32px;
 }
