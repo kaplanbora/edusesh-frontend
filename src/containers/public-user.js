@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {getTargetCredentials, getTargetProfile, getTargetTopics} from "../actions/load";
-import Topic from "../components/Topic";
+import Topic from "../components/topic";
+import SessionRequest from "./session-request";
 
 class PublicUser extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class PublicUser extends Component {
       <div className="columns full-height">
         <div className="col-3 mt-4">
           <div className="col-6 centered">
-            <button className="btn btn-block btn-primary my-2">Session Request</button>
+            <SessionRequest topics={topics} token={this.props.token} id={this.props.match.params.id}/>
             <button className="btn btn-block my-2">Send Message</button>
             <span className="label d-block p-2 text-center">Hourly Rate: {profile.hourlyRate}$</span>
           </div>
@@ -54,7 +55,8 @@ class PublicUser extends Component {
 }
 
 const mapStateToProps = state => ({
-  targetUser: state.targetUser
+  targetUser: state.targetUser,
+  token: state.token
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

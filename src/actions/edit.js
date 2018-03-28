@@ -1,4 +1,4 @@
-import {API_URL, ERR_CLEAR, EDIT_CREDENTIALS, ERR_SUBMIT} from "./types";
+import {API_URL, ERR_CLEAR, EDIT_CREDENTIALS, ERR_LOGIN} from "./types";
 import axios from "axios";
 import {SubmissionError} from 'redux-form';
 
@@ -20,7 +20,7 @@ export const saveCredentials = (credentials, token, dispatch) => {
     })
   }).catch(error => {
     dispatch({
-      type: ERR_SUBMIT,
+      type: ERR_LOGIN,
       payload: error.message === "Network Error" ? "Connection error." : "Error while changing credentials."
     })
   });
@@ -51,7 +51,7 @@ const uploadImage = (image, token, dispatch) => {
   }).then(image => postTraineeProfile(image, values))
     .catch(error =>
       dispatch({
-        type: ERR_SUBMIT,
+        type: ERR_LOGIN,
         payload: error.message === "Network Error" ? "Connection error." : "Error while changing credentials."
       })
     )

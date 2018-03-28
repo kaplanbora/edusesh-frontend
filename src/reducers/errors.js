@@ -1,21 +1,24 @@
-import {ERR_CLEAR, ERR_SUBMIT} from "../actions/types";
+import {ERR_CLEAR, ERR_LOGIN, ERR_SESSION_REQUEST} from "../actions/types";
 
 const initialState = {
-  submit: null
+  login: null,
+  sessionRequest: null
 };
 
 const errorReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ERR_SUBMIT:
+    case ERR_LOGIN:
       return {
-        submit: action.payload
+        login: action.payload,
+        sessionRequest: null
+      };
+    case ERR_SESSION_REQUEST:
+      return {
+        login: null,
+        sessionRequest: action.payload
       };
     case ERR_CLEAR:
-      if (action.payload === "submit") {
-        return initialState;
-      } else {
-        return initialState;
-      }
+      return initialState;
     default:
       return state;
   }

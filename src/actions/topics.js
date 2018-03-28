@@ -1,7 +1,7 @@
-import {ADD_USER_TOPIC, API_URL} from "./types";
+import {ADD_USER_TOPIC, API_URL, ERR_SESSION_REQUEST} from "./types";
 import axios from "axios";
 
-const postWithToken = (token, route, data) => {
+export const postWithToken = (token, route, data) => {
   return axios({
     method: "post",
     url: API_URL + route,
@@ -13,6 +13,20 @@ const postWithToken = (token, route, data) => {
     }
     return response
   }).catch(error => console.log(error));
+};
+
+export const postWithTokenDispatch = (dispatch, token, route, data) => {
+  return axios({
+    method: "post",
+    url: API_URL + route,
+    headers: {"JWT": token},
+    data: data
+  }).catch(error => {
+    dispatch({
+      type: ERR_SESSION_REQUEST,
+      payload: error.message
+    })
+  });
 };
 
 export const deleteWithToken = (token, route) => {

@@ -4,7 +4,7 @@ import {reduxForm} from "redux-form";
 import UserInput from "./user-input";
 import Info from "./info";
 
-const TextArea = ({input, label, placeholder}) => {
+export const TextArea = ({input, label, placeholder}) => {
   return (
     <div className="form-group">
       <label className="form-label">{label}</label>

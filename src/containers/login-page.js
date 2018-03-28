@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {loginUser} from "../actions/auth";
 import LoginForm from "../components/login-form"
 import {clearError} from "../actions";
-import {ERR_CLEAR, MODAL_CLOSE_LOGIN, MODAL_OPEN_LOGIN} from "../actions/types";
+import {MODAL_CLOSE_LOGIN, MODAL_OPEN_LOGIN} from "../actions/types";
 
 let LoginPage = ({login, token, submitError, modal, clear, openModal, closeModal}) =>
   token
@@ -20,7 +20,7 @@ let LoginPage = ({login, token, submitError, modal, clear, openModal, closeModal
 
 const mapStateToProps = state => ({
   token: state.token,
-  submitError: state.errors.submit,
+  submitError: state.errors.login,
   modal: state.modals.login
 });
 
@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
   login: values => loginUser(values, dispatch),
   openModal: () => dispatch({type: MODAL_OPEN_LOGIN}),
   closeModal: () => dispatch({type: MODAL_CLOSE_LOGIN}),
-  clear: () => dispatch(clearError("submit"))
+  clear: () => dispatch(clearError())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

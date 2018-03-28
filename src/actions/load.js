@@ -40,7 +40,7 @@ export const getProfile = token => ({
   payload: getWithToken(token, "/users/profile")
 });
 
-const getWithToken = (token, route) => {
+export const getWithToken = (token, route) => {
   return axios({
     method: "get",
     url: API_URL + route,
@@ -53,7 +53,7 @@ const getWithToken = (token, route) => {
   }).catch(error => console.log(error.message));
 };
 
-const getWithoutToken = (route) => {
+export const getWithoutToken = (route) => {
   return axios({
     method: "get",
     url: API_URL + route
