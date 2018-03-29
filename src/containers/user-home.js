@@ -24,9 +24,25 @@ class UserHome extends Component {
   }
 
   render() {
+    if (this.props.sessions.length === 0) {
+      return (
+        <div className="columns flex-centered full-height">
+          <div className="empty">
+            <div className="empty-icon">
+              <i className="icon icon-time icon-4x"/>
+            </div>
+            <p className="empty-title h5">You have no sessions</p>
+            <p className="empty-subtitle">Find instructors and start learning</p>
+            <div className="empty-action">
+              <button className="btn btn-primary">Find Instructors</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
-      <div className="columns">
-        <div className="column col-8 p-3 white-bg m-3 shadowed">
+      <div className="columns flex-centered">
+        <div className="column col-10 p-3 white-bg m-3 shadowed">
           <h3>Sessions</h3>
           <div className="divider"/>
           <table className="table table-striped table-hover">
@@ -42,7 +58,8 @@ class UserHome extends Component {
             <tbody>
             {this.props.sessions.map(session =>
               <tr key={session.id}>
-                <td><Link className="btn btn-link" to={"/user/" + session.instructorId}>{session.instructorId}</Link></td>
+                <td><Link className="btn btn-link" to={"/user/" + session.instructorId}>{session.instructorId}</Link>
+                </td>
                 <td>{session.topicId}</td>
                 <td>{session.description}</td>
                 <td>{this.formatDate(session.date)}</td>
@@ -51,9 +68,6 @@ class UserHome extends Component {
             )}
             </tbody>
           </table>
-        </div>
-        <div className="column col-2 p-3 m-3 white-bg shadowed">
-          <button className="btn btn-primary btn-block">Why though</button>
         </div>
       </div>
     );

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import spectre from "../../style/spectre.min.css";
+import spectre_icons from "../../style/spectre-icons.min.css";
 import style from "../../style/master.css";
 import Navbar from "../components/navbar"
 import HomePage from "../containers/home-page"
@@ -22,12 +23,14 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="container">
+        <div>
           <Navbar token={this.props.token}/>
-          <Route exact path="/" component={HomePage}/>
-          <Route path="/register" component={RegisterPage}/>
-          <Route exact path="/user" component={SettingsPage}/>
-          <Route path="/user/:id" component={PublicUser}/>
+          <div className="container">
+            <Route exact path="/" component={HomePage}/>
+            <Route path="/register" component={RegisterPage}/>
+            <Route exact path="/user" component={SettingsPage}/>
+            <Route path="/user/:id" component={PublicUser}/>
+          </div>
         </div>
       </BrowserRouter>
     )

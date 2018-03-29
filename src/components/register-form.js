@@ -5,19 +5,17 @@ import {CredentialsForm} from "./credentials-form";
 
 const RegisterForm = ({handleSubmit}) => {
   return (
-    <div className="container">
-      <div className="columns col-oneline">
-        <div className="column centered col-3 col-xl-4 col-lg-6 col-md-7 col-sm-10 col-xs-12">
+      <div className="columns full-height flex-centered">
+        <div className="column centered col-4 white-bg p-3 shadowed">
           <form onSubmit={handleSubmit}>
             <h1>Sign Up</h1>
             <div className="divider"/>
             <p>Start learning from various professional instructors here at edusesh.</p>
             <CredentialsForm/>
-            <button className="btn btn-primary form-submit float-right my-2">Register</button>
+            <button className="btn btn-primary form-submit float-right mt-3">Register</button>
           </form>
         </div>
       </div>
-    </div>
   )
 };
 
