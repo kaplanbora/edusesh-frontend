@@ -11,9 +11,9 @@ const SessionRequest = ({onSubmit, id, topics, token, handleSubmit, openModal, c
   return !token ?
     <Redirect to="/"/> :
     (<div>
-        <button className="btn btn-block btn-primary my-2" onClick={openModal}>Session Request</button>
+        <button className="btn btn-block btn-lg btn-primary my-2" onClick={openModal}>Session Request</button>
         <Modal modal={modal} closeModal={closeModal}>
-          <SessionRequestForm topics={topics} onSubmit={onSubmit}/>
+          <SessionRequestForm topics={topics} onSubmit={onSubmit} initialValues={{topic: 1}}/>
         </Modal>
       </div>
     );

@@ -1,13 +1,15 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import UserHome from "./user-home";
 
-const HomePage = () => {
-  return (
-    <div>
-      Home
-      <Link to="/user/39">You must bow to your knees.</Link>
-    </div>
-  );
-};
+const HomePage = ({token}) =>
+  token
+    ? <UserHome token={token}/>
+    : <div>Yo</div>;
 
-export default HomePage
+
+const mapStateToProps = state => ({
+  token: state.token
+});
+
+export default connect(mapStateToProps, null)(HomePage)

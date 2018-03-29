@@ -27,15 +27,15 @@ class PublicUser extends Component {
       `${profile.firstName.charAt(0)}${profile.lastName.charAt(0)}` :
       `${credentials.email.substring(0, 2).toUpperCase()}`;
     return (
-      <div className="columns full-height">
-        <div className="col-3 mt-4">
-          <div className="col-6 centered">
+      <div className="columns">
+        <div className="column col-3 mt-3">
+          <div className="column col-9 centered white-bg shadowed p-3">
             <SessionRequest topics={topics} token={this.props.token} id={this.props.match.params.id}/>
             <button className="btn btn-block my-2">Send Message</button>
             <span className="label d-block p-2 text-center">Hourly Rate: {profile.hourlyRate}$</span>
           </div>
         </div>
-        <div className="col-6 p-5 centered white-bg">
+        <div className="column col-6 p-5 centered white-bg m-3 shadowed">
           <img className="centered" width="300" height="300" alt={initials} src={image}/>
           <h2 className="text-center">{`${profile.firstName} ${profile.lastName}`}</h2>
           <h4 className="text-center">{profile.occupation}</h4>
@@ -48,7 +48,7 @@ class PublicUser extends Component {
             <Topic key={topic.id} topic={topic}/>
           )}
         </div>
-        <div className="col-3"/>
+        <div className="column col-3"/>
       </div>
     );
   }

@@ -1,12 +1,13 @@
 import {
   AUTH_LOGOUT, LOAD_PROFILE, LOAD_CREDENTIALS, LOAD_USER_TOPICS, ADD_USER_TOPIC,
-  LOAD_SELF_TOPICS, REMOVE_USER_TOPIC
+  LOAD_SELF_TOPICS, REMOVE_USER_TOPIC, LOAD_SELF_SESSIONS
 } from "../actions/types";
 
 const initialState = {
   profile: {},
   credentials: {},
-  topics: []
+  topics: [],
+  sessions: []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -15,47 +16,59 @@ const userReducer = (state = initialState, action) => {
       return initialState;
 
     case LOAD_CREDENTIALS:
-      const credentials = action.payload.data;
       return {
         profile: state.profile,
-        credentials,
-        topics: state.topics
+        credentials: action.payload.data,
+        topics: state.topics,
+        sessions: state.sessions
       };
 
     case LOAD_PROFILE:
-      const profile = action.payload.data;
       return {
-        profile,
+        profile: action.payload.data,
         credentials: state.credentials,
-        topics: state.topics
+        topics: state.topics,
+        sessions: state.sessions
       };
 
     case LOAD_USER_TOPICS:
       return {
         profile: state.profile,
         credentials: state.credentials,
-        topics: action.payload.data
+        topics: action.payload.data,
+        sessions: state.sessions
       };
 
     case ADD_USER_TOPIC:
       return {
         profile: state.profile,
         credentials: state.credentials,
-        topics: [...state.topics, action.payload]
+        topics: [...state.topics, action.payload],
+        sessions: state.sessions
       };
 
     case LOAD_SELF_TOPICS:
       return {
         profile: state.profile,
         credentials: state.credentials,
-        topics: action.payload.data
+        topics: action.payload.data,
+        sessions: state.sessions
       };
 
     case REMOVE_USER_TOPIC:
       return {
         profile: state.profile,
         credentials: state.credentials,
-        topics: state.topics.filter(topic => topic.id != action.payload)
+        topics: state.topics.filter(topic => topic.id != action.payload),
+        sessions: state.sessions
+      };
+
+    case LOAD_SELF_SESSIONS:
+      return {
+        profile: state.profile,
+        credentials: state.credentials,
+        topics: state.topics,
+        sessions: action.payload.data
       };
 
     default:

@@ -1,9 +1,15 @@
 import axios from "axios";
 import {
-  API_URL, LOAD_CREDENTIALS, LOAD_MAIN_TOPICS, LOAD_PROFILE, LOAD_SELF_TOPICS, LOAD_TARGET_CREDENTIALS,
+  API_URL, LOAD_CREDENTIALS, LOAD_MAIN_TOPICS, LOAD_PROFILE, LOAD_SELF_SESSIONS, LOAD_SELF_TOPICS,
+  LOAD_TARGET_CREDENTIALS,
   LOAD_TARGET_PROFILE,
   LOAD_TARGET_TOPICS,
 } from "./types";
+
+export const getSelfSessions = token => ({
+  type: LOAD_SELF_SESSIONS,
+  payload: getWithToken(token, "/sessions")
+});
 
 export const getTargetTopics = userId => ({
   type: LOAD_TARGET_TOPICS,
