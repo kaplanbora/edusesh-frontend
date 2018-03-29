@@ -42,8 +42,8 @@ class UserHome extends Component {
             <tbody>
             {this.props.sessions.map(session =>
               <tr key={session.id}>
-                <td><Link className="btn btn-link" to={"/user/" + session.instructorId}>{session.instructor}</Link></td>
-                <td>{session.topic}</td>
+                <td><Link className="btn btn-link" to={"/user/" + session.instructorId}>{session.instructorId}</Link></td>
+                <td>{session.topicId}</td>
                 <td>{session.description}</td>
                 <td>{this.formatDate(session.date)}</td>
                 <td>{this.getStatus(session)}</td>
