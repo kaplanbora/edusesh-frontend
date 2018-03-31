@@ -13,12 +13,13 @@ const SessionRequestForm = ({topics, handleSubmit}) => {
       <div className="form-horizontal">
         <Field name="topic" label="Topic" options={topics} component={HorizontalSelect}/>
         <Field name="date" label="Date" placeholder="3/28/2018, 9:14:13 PM" component={HorizontalInput}/>
+        <Field name="name" label="About" placeholder="What is the lesson is about?" component={HorizontalInput}/>
       </div>
       <div className="divider"/>
       <Field
         name="description"
         label="Request Description"
-        placeholder="Explain why are you sending a session request and what would you like to learn."
+        placeholder="Detailed information about the lesson and some extras you would like to include."
         component={TextArea}/>
       <button className="btn btn-primary float-right mt-3">Send</button>
     </form>

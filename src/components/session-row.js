@@ -17,7 +17,8 @@ export const SessionRow = ({role, session, approveSession, removeSession}) => {
     <tr>
       <td><Link className="btn btn-link" to={"/user/" + session.instructorId}>{session.instructorId}</Link></td>
       <td>{session.topicId}</td>
-      <td><Link className="btn btn-link" key={session.id} to={`/session/${session.id}`}>{session.description}</Link></td>
+      <td><Link className="btn btn-link" to={`/session/${session.id}`}>{session.name}</Link></td>
+      <td>{session.description}</td>
       <td>{formatDate(session.date)}</td>
       <td>{getStatus(session)}</td>
       <td>

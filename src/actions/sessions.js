@@ -14,7 +14,7 @@ export const loadSession = (dispatch, token, id) => {
 export const sessionRequest = (dispatch, values, token, id) => {
   const date = new Date(Date.parse(values.date));
   const data = {
-    name: "name",
+    name: values.name,
     description: values.description,
     instructorId: parseInt(id),
     topicId: parseInt(values.topic),

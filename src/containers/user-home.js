@@ -43,6 +43,7 @@ class UserHome extends Component {
             <tr>
               <th>Instructor</th>
               <th>Topic</th>
+              <th>Name</th>
               <th>Description</th>
               <th>Date</th>
               <th>Status</th>
