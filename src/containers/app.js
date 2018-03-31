@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import RegisterPage from "./register-page"
 import SettingsPage from "./settings-page"
 import PublicUser from "./public-user";
+import LiveSession from "./live-session";
 import {BrowserRouter, Route} from "react-router-dom";
 import {tokenFromCookie} from "../actions";
 
@@ -30,6 +31,7 @@ class App extends Component {
             <Route path="/register" component={RegisterPage}/>
             <Route exact path="/user" component={SettingsPage}/>
             <Route path="/user/:id" component={PublicUser}/>
+            <Route path="/session/:id" component={LiveSession}/>
           </div>
         </div>
       </BrowserRouter>

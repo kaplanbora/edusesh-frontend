@@ -4,6 +4,7 @@ import {getSelfSessions} from "../actions/load";
 import {Link} from "react-router-dom";
 import {REMOVE_SESSION} from "../actions/types";
 import {approveSession, removeSession} from "../actions/sessions";
+import {SessionRow} from "../components/session-row";
 
 class UserHome extends Component {
   constructor(props) {
@@ -14,16 +15,6 @@ class UserHome extends Component {
     this.props.loadSessions();
   }
 
-  getStatus(session) {
-    if (session.isCompleted) return "Completed";
-    else if (session.isApproved) return "Approved";
-    else return "Not Approved";
-  }
-
-  formatDate(date) {
-    const d = new Date(Date.parse(date));
-    return d.toLocaleString();
-  }
 
   render() {
     if (this.props.sessions.length === 0) {
@@ -62,24 +53,14 @@ class UserHome extends Component {
             {this.props.sessions
               .filter(session => !session.isDeleted)
               .map(session =>
-              <tr key={session.id}>
-                <td><Link className="btn btn-link" to={"/user/" + session.instructorId}>{session.instructorId}</Link>
-                </td>
-                <td>{session.topicId}</td>
-                <td>{session.description}</td>
-                <td>{this.formatDate(session.date)}</td>
-                <td>{this.getStatus(session)}</td>
-                <td>
-                  <button className="btn btn-link" onClick={() => this.props.removeSession(session.id)}>
-                    <i className="icon icon-cross"/>
-                  </button>
-                  {this.props.role === "instructor" && !session.isApproved &&
-                  <button className="btn btn-link" onClick={() => this.props.approveSession(session.id)}>
-                    <i className="icon icon-check"/>
-                  </button>}
-                </td>
-              </tr>
-            )}
+                <SessionRow
+                  key={session.id}
+                  session={session}
+                  approveSession={this.props.approveSession}
+                  removeSession={this.props.removeSession}
+                  role={this.props.role}
+                />
+              )}
             </tbody>
           </table>
         </div>

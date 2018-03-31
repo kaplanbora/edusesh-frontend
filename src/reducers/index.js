@@ -7,6 +7,7 @@ import topicsReducer from "./topics";
 import {combineReducers} from "redux";
 import {reducer as formReducer} from "redux-form";
 import targetUserReducer from "./target";
+import {sessionReducer} from "./session";
 
 const eduseshReducers = combineReducers({
   user: userReducer,
@@ -16,6 +17,7 @@ const eduseshReducers = combineReducers({
   section: sectionReducer,
   topics: topicsReducer,
   targetUser: targetUserReducer,
+  session: sessionReducer,
   form: formReducer
 });
 
