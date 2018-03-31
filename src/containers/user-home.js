@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {getSelfSessions} from "../actions/load";
 import {Link} from "react-router-dom";
+import {REMOVE_SESSION} from "../actions/types";
+import {approveSession, removeSession} from "../actions/sessions";
 
 class UserHome extends Component {
   constructor(props) {
@@ -53,10 +55,13 @@ class UserHome extends Component {
               <th>Description</th>
               <th>Date</th>
               <th>Status</th>
+              <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            {this.props.sessions.map(session =>
+            {this.props.sessions
+              .filter(session => !session.isDeleted)
+              .map(session =>
               <tr key={session.id}>
                 <td><Link className="btn btn-link" to={"/user/" + session.instructorId}>{session.instructorId}</Link>
                 </td>
@@ -64,6 +69,15 @@ class UserHome extends Component {
                 <td>{session.description}</td>
                 <td>{this.formatDate(session.date)}</td>
                 <td>{this.getStatus(session)}</td>
+                <td>
+                  <button className="btn btn-link" onClick={() => this.props.removeSession(session.id)}>
+                    <i className="icon icon-cross"/>
+                  </button>
+                  {this.props.role === "instructor" && !session.isApproved &&
+                  <button className="btn btn-link" onClick={() => this.props.approveSession(session.id)}>
+                    <i className="icon icon-check"/>
+                  </button>}
+                </td>
               </tr>
             )}
             </tbody>
@@ -80,7 +94,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadSessions: () => dispatch(getSelfSessions(ownProps.token))
+  loadSessions: () => dispatch(getSelfSessions(ownProps.token)),
+  removeSession: id => removeSession(dispatch, id, ownProps.token),
+  approveSession: id => approveSession(dispatch, id, ownProps.token)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserHome)

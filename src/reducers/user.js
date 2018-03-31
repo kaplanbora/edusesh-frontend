@@ -1,6 +1,6 @@
 import {
   AUTH_LOGOUT, LOAD_PROFILE, LOAD_CREDENTIALS, LOAD_USER_TOPICS, ADD_USER_TOPIC,
-  LOAD_SELF_TOPICS, REMOVE_USER_TOPIC, LOAD_SELF_SESSIONS
+  LOAD_SELF_TOPICS, REMOVE_USER_TOPIC, LOAD_SELF_SESSIONS, REMOVE_SESSION, APPROVE_SESION
 } from "../actions/types";
 
 const initialState = {
@@ -69,6 +69,24 @@ const userReducer = (state = initialState, action) => {
         credentials: state.credentials,
         topics: state.topics,
         sessions: action.payload.data
+      };
+
+    case REMOVE_SESSION:
+      return {
+        profile: state.profile,
+        credentials: state.credentials,
+        topics: state.topics,
+        sessions: state.sessions.filter(session => session.id != action.payload)
+      };
+
+    case APPROVE_SESION:
+      const approved = state.sessions.filter(session => session.id == action.payload)[0];
+      approved.isApproved = true;
+      return {
+        profile: state.profile,
+        credentials: state.credentials,
+        topics: state.topics,
+        sessions: state.sessions
       };
 
     default:

@@ -37,6 +37,15 @@ export const deleteWithToken = (token, route) => {
   })
 };
 
+export const putWithToken = (token, route, data) => {
+  return axios({
+    method: "put",
+    url: API_URL + route,
+    headers: {"JWT": token},
+    data
+  })
+};
+
 export const addUserTopic = (values, token, dispatch) => {
   const userTopic = {
     name: values.name,
