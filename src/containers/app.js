@@ -24,15 +24,13 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <div className="container">
           <Navbar token={this.props.token}/>
-          <div className="container">
-            <Route exact path="/" component={HomePage}/>
-            <Route path="/register" component={RegisterPage}/>
-            <Route exact path="/user" component={SettingsPage}/>
-            <Route path="/user/:id" component={PublicUser}/>
-            <Route path="/session/:id" component={LiveSession}/>
-          </div>
+          <Route exact path="/" component={HomePage}/>
+          <Route path="/register" component={RegisterPage}/>
+          <Route exact path="/user" component={SettingsPage}/>
+          <Route path="/user/:id" component={PublicUser}/>
+          <Route path="/session/:id" component={LiveSession}/>
         </div>
       </BrowserRouter>
     )
