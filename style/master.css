@@ -19,9 +19,7 @@ html, body {
 }
 
 .navbar {
-    padding: 16px;
-    /*background: rgba(248, 249, 250, .65);*/
-    /*background-color: white;*/
+    padding: 12px;
 }
 
 .right-mg {

@@ -15,7 +15,7 @@ const RememberCheck = ({input}) => {
 const LoginForm = ({clear, handleSubmit, submitError, submitting, modal, openModal, closeModal}) => {
   return (
     <div>
-      <button className="btn btn-primary mx-2" onClick={openModal}>Login</button>
+      <button className="btn btn-success mx-2" onClick={openModal}>Login</button>
       <div className={`modal ${modal ? "active" : ""}`} id="modal-id">
         <a href="#" onClick={closeModal} className="modal-overlay" aria-label="Close"/>
 

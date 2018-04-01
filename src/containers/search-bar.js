@@ -18,7 +18,7 @@ const SearchBar = () => {
         <input className="form-input" placeholder="Find topics or instructors" ref={node => {
           searchInput = node
         }}/>
-        <button className="btn btn-primary input-group-btn">Search</button>
+        <button className="btn btn-success input-group-btn">Search</button>
       </div>
     </form>
   );

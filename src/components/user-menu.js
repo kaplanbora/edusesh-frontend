@@ -20,7 +20,7 @@ const UserMenu = ({credentials, profile, notifications, onLogout}) => {
     <div className="columns">
       <div className="column col-4 col-xs-12">
         <div className="dropdown dropdown-right">
-          <figure className={`avatar dropdown-toggle ${notifications ? "badge" : ""}`} tabIndex="0"
+          <figure className={`avatar white-bg dropdown-toggle ${notifications ? "badge" : ""}`} tabIndex="0"
                   data-badge={notifications ? notifications.length : 0}
                   data-initial={initials}>
             <img alt={initials} src={image}/>
