@@ -7,13 +7,18 @@ class LiveSession extends Component {
     super(props);
   }
 
-  componentWillReceiveProps() {
-    if (this.props.token) {
-      this.props.loadSession(this.props.token)
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.token) {
+      this.props.load(nextProps.token)
     }
   }
 
   render() {
+    if (!this.props.session) {
+      return (
+        <div className="loading loading-lg flex-centered full-height"/>
+      );
+    }
     return (
       <div className="columns col-gapless full-height">
         <div className="column col-9 stream">
@@ -21,7 +26,8 @@ class LiveSession extends Component {
         </div>
         <div className="column col-3">
           <div className="status center-inside">
-            <h1>00:13:37</h1>
+            <h4>{this.props.session.name}</h4>
+            <h4>00:13:37</h4>
             <button className="btn btn-primary btn-block">End Session</button>
           </div>
 
@@ -104,7 +110,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadSession: token => loadSession(dispatch, token, ownProps.match.params.id)
+  load: token => loadSession(dispatch, token, ownProps.match.params.id)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LiveSession)
