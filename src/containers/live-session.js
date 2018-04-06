@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {loadSession} from "../actions/sessions";
+import {EmptyState} from "../components/empty-state";
+
+const isFutureDate = date => Date.now() - Date.parse(date) < 0;
 
 class LiveSession extends Component {
   constructor(props) {
@@ -14,10 +17,27 @@ class LiveSession extends Component {
   }
 
   render() {
-    if (!this.props.session) {
+    const sesh = this.props.session;
+    if (!sesh) {
       return (
         <div className="loading loading-lg flex-centered full-height"/>
       );
+    } else if (sesh && isFutureDate(sesh.date)) {
+      return (
+      <EmptyState
+        title="Your session has not started yet"
+        message={`Session Date: ${sesh.date}`}
+        icon="icon-time"
+      />
+      )
+    } else if (sesh && !sesh.isApproved) {
+      return (
+        <EmptyState
+          title="Your session request has been denied"
+          message={`${sesh.instructorId} has rejected your request for a session.`}
+          icon="icon-cross"
+        />
+      )
     }
     return (
       <div className="columns col-gapless full-height">

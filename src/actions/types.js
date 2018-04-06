@@ -1,5 +1,5 @@
 // export const API_URL = "http://localhost:9000";
-export const API_URL = "http://192.168.1.30:9000";
+export const API_URL = "http://192.168.1.42:9000";
 
 export const EDIT_SESSION_SETTINGS = "EDIT_SESSION_SETTINGS";
 export const EDIT_PROFILE = "EDIT_PROFILE";

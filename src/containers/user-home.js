@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {REMOVE_SESSION} from "../actions/types";
 import {approveSession, removeSession} from "../actions/sessions";
 import {SessionRow} from "../components/session-row";
+import {EmptyState} from "../components/empty-state";
 
 class UserHome extends Component {
   constructor(props) {
@@ -19,18 +20,12 @@ class UserHome extends Component {
   render() {
     if (this.props.sessions.length === 0) {
       return (
-        <div className="columns flex-centered full-height">
-          <div className="empty">
-            <div className="empty-icon">
-              <i className="icon icon-time icon-4x"/>
-            </div>
-            <p className="empty-title h5">You have no sessions</p>
-            <p className="empty-subtitle">Find instructors and start learning</p>
-            <div className="empty-action">
-              <button className="btn btn-primary">Find Instructors</button>
-            </div>
-          </div>
-        </div>
+        <EmptyState
+          title="You have no sessions"
+          message="Find instructors and start learning"
+          icon="icon-title"
+          buttonText="Find Instructors"
+        />
       );
     }
     return (

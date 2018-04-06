@@ -32,10 +32,19 @@ export const removeSession = (dispatch, id, token) => {
   })
 };
 
+export const startSession = (dispatch, id, token) => {
+  putWithToken(token, "/sessions/" + id, {
+    isApproved: true,
+    isCompleted: false,
+    isStarted: true
+  });
+};
+
 export const approveSession = (dispatch, id, token) => {
   putWithToken(token, "/sessions/" + id, {
     isApproved: true,
-    isCompleted: false
+    isCompleted: false,
+    isStarted: false
   });
 
   return dispatch({
