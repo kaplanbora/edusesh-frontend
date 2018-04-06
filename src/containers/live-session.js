@@ -2,8 +2,21 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {loadSession} from "../actions/sessions";
 import {EmptyState} from "../components/empty-state";
+import {SET_USER_READY} from "../actions/types";
+
+// const socket = new WebSocket("ws://192.168.1.42:6503", "json");
+var connection = null;
 
 const isFutureDate = date => Date.now() - Date.parse(date) < 0;
+
+const onUserReady = (dispatch, user) => {
+  // socket.send(JSON.stringify({
+  //   type: "user_ready",
+  //   userId: user.credentials.id
+  // }));
+  dispatch({type: SET_USER_READY})
+};
+
 
 class LiveSession extends Component {
   constructor(props) {
@@ -11,7 +24,7 @@ class LiveSession extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.token) {
+    if (nextProps.token && !nextProps.session) {
       this.props.load(nextProps.token)
     }
   }
@@ -22,21 +35,40 @@ class LiveSession extends Component {
       return (
         <div className="loading loading-lg flex-centered full-height"/>
       );
-    } else if (sesh && isFutureDate(sesh.date)) {
+    } else if (isFutureDate(sesh.date)) {
       return (
-      <EmptyState
-        title="Your session has not started yet"
-        message={`Session Date: ${sesh.date}`}
-        icon="icon-time"
-      />
+        <EmptyState
+          title="Your session has not started yet"
+          message={`Session Date: ${sesh.date}`}
+          icon="icon-time"
+        />
       )
-    } else if (sesh && !sesh.isApproved) {
+    } else if (!sesh.isApproved) {
       return (
         <EmptyState
           title="Your session request has been denied"
           message={`${sesh.instructorId} has rejected your request for a session.`}
           icon="icon-cross"
         />
+      )
+    } else if (!sesh.isStarted) {
+      return (
+        <div className="columns flex-centered full-height">
+          <div>
+            <h2 className="py-2">Are you ready to start?</h2>
+            <button className="btn btn-primary btn-lg centered" onClick={() => this.props.onReady(this.props.user)}>Start Session</button>
+            <div className="py-2 flex-centered">
+              <div className="p-3 center-inside">
+                <h4>You</h4>
+                <i className={`icon icon-2x ${sesh.userReady ? "icon-check" : "icon-cross"}`}/>
+              </div>
+              <div className="p-3 center-inside">
+                <h4>Them</h4>
+                <i className={`icon icon-2x ${sesh.targetReady ? "icon-check" : "icon-cross"}`}/>
+              </div>
+            </div>
+          </div>
+        </div>
       )
     }
     return (
@@ -64,7 +96,8 @@ class LiveSession extends Component {
                 </div>
                 <div className="tile-content">
                   <p className="tile-title">Thor Odinson</p>
-                  <p className="tile-subtitle">Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...</p>
+                  <p
+                    className="tile-subtitle">Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...</p>
                 </div>
               </div>
               <div className="tile">
@@ -75,7 +108,8 @@ class LiveSession extends Component {
                 </div>
                 <div className="tile-content">
                   <p className="tile-title">Bruce Banner</p>
-                  <p className="tile-subtitle">The Strategic Homeland Intervention, Enforcement, and Logistics Division...</p>
+                  <p
+                    className="tile-subtitle">The Strategic Homeland Intervention, Enforcement, and Logistics Division...</p>
                 </div>
               </div>
               <div className="tile">
@@ -84,7 +118,8 @@ class LiveSession extends Component {
                 </div>
                 <div className="tile-content">
                   <p className="tile-title">Tony Stark</p>
-                  <p className="tile-subtitle">Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...</p>
+                  <p
+                    className="tile-subtitle">Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...</p>
                 </div>
               </div>
               <div className="tile">
@@ -95,7 +130,8 @@ class LiveSession extends Component {
                 </div>
                 <div className="tile-content">
                   <p className="tile-title">Steve Rogers</p>
-                  <p className="tile-subtitle">The Strategic Homeland Intervention, Enforcement, and Logistics Division...</p>
+                  <p
+                    className="tile-subtitle">The Strategic Homeland Intervention, Enforcement, and Logistics Division...</p>
                 </div>
               </div>
               <div className="tile">
@@ -106,14 +142,15 @@ class LiveSession extends Component {
                 </div>
                 <div className="tile-content">
                   <p className="tile-title">Natasha Romanoff</p>
-                  <p className="tile-subtitle">Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...</p>
+                  <p
+                    className="tile-subtitle">Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...</p>
                 </div>
               </div>
             </div>
             <div className="panel-footer">
               <div className="input-group">
                 <input className="form-input" placeholder="Hello" type="text"/>
-                  <button className="btn btn-primary input-group-btn">Send</button>
+                <button className="btn btn-primary input-group-btn">Send</button>
               </div>
             </div>
           </div>
@@ -126,11 +163,13 @@ class LiveSession extends Component {
 
 const mapStateToProps = state => ({
   session: state.session,
-  token: state.token
+  token: state.token,
+  user: state.user
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  load: token => loadSession(dispatch, token, ownProps.match.params.id)
+  load: token => loadSession(dispatch, token, ownProps.match.params.id),
+  onReady: user => onUserReady(dispatch, user)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LiveSession)
