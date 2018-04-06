@@ -66,7 +66,10 @@ class LiveSession extends Component {
             if (user.credentials.userRole === "instructor") {
               startSession(session.id, nextProps.token)
             }
-            dispatch({type: START_SESSION});
+            dispatch({
+              type: START_SESSION,
+              payload: message.payload
+            });
             break;
         }
 
