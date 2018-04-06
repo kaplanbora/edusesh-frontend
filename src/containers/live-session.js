@@ -1,22 +1,32 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {loadSession} from "../actions/sessions";
+import {loadSession, startSession} from "../actions/sessions";
 import {EmptyState} from "../components/empty-state";
-import {SET_USER_READY} from "../actions/types";
+import {SET_TARGET_READY, SET_USER_READY, START_SESSION} from "../actions/types";
 
-// const socket = new WebSocket("ws://192.168.1.42:6503", "json");
+const socket = new WebSocket("ws://192.168.1.42:6503", "json");
+
+function sendToServer(message) {
+  let msgJSON = JSON.stringify(message);
+  log("Sending '" + message.type + "' message: " + msgJSON);
+  socket.send(msgJSON);
+}
+
 var connection = null;
 
 const isFutureDate = date => Date.now() - Date.parse(date) < 0;
 
 const onUserReady = (dispatch, user) => {
-  // socket.send(JSON.stringify({
-  //   type: "user_ready",
-  //   userId: user.credentials.id
-  // }));
+  sendToServer({
+    type: "user_ready",
+    payload: user.credentials.id
+  });
   dispatch({type: SET_USER_READY})
 };
 
+const onTargetReady = dispatch => {
+  dispatch({type: SET_TARGET_READY})
+};
 
 class LiveSession extends Component {
   constructor(props) {
@@ -26,6 +36,41 @@ class LiveSession extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.token && !nextProps.session) {
       this.props.load(nextProps.token)
+    }
+
+    if (nextProps.user && nextProps.session && nextProps.dispatch) {
+      const user = nextProps.user;
+      const session = nextProps.session;
+      const dispatch = nextProps.dispatch;
+
+      sendToServer({
+        type: "initiate",
+        payload: {
+          session,
+          user
+        }
+      });
+
+      socket.onmessage = event => {
+        let message = JSON.parse(event.data);
+        console.log("MESSAGE: ");
+        console.dir(message);
+        let time = new Date(message.date);
+        let timeStr = time.toLocaleTimeString();
+
+        switch (message.type) {
+          case "target_is_ready":
+            onTargetReady(dispatch);
+            break;
+          case "start_session":
+            if (user.credentials.userRole === "instructor") {
+              startSession(session.id, nextProps.token)
+            }
+            dispatch({type: START_SESSION});
+            break;
+        }
+
+      }
     }
   }
 

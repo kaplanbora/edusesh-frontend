@@ -1,5 +1,5 @@
 import {deleteWithToken, postWithTokenDispatch, putWithToken} from "./topics";
-import {APPROVE_SESION, LOAD_SESSION, REMOVE_SESSION} from "./types";
+import {APPROVE_SESION, LOAD_SESSION, REMOVE_SESSION, START_SESSION} from "./types";
 import {getWithToken} from "./load";
 
 export const loadSession = (dispatch, token, id) => {
@@ -32,7 +32,7 @@ export const removeSession = (dispatch, id, token) => {
   })
 };
 
-export const startSession = (dispatch, id, token) => {
+export const startSession = (id, token) => {
   putWithToken(token, "/sessions/" + id, {
     isApproved: true,
     isCompleted: false,
