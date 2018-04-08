@@ -6,14 +6,18 @@ import {startConnection} from "../actions/signal";
 
 const isFutureDate = date => Date.now() - Date.parse(date) < 0;
 
-export const LiveSession = ({session, user, token, dispatch, localStream, remoteStream}) => {
+export const LiveSession = ({session, user, token, dispatch}) => {
   if (!session || !user || !token || !dispatch) {
     return (
       <div className="loading loading-lg flex-centered full-height"/>
     );
   }
 
-  setTimeout(() => startConnection(session, user, token, dispatch), 200);
+  let localStream = null;
+  let remoteStream = null;
+  let invite = null;
+
+  setTimeout(() => invite = startConnection(session, user, token, dispatch, localStream, remoteStream), 200);
 
   if (isFutureDate(session.date)) {
     return (
@@ -53,11 +57,14 @@ export const LiveSession = ({session, user, token, dispatch, localStream, remote
       </div>
     )
   }
+
+  setTimeout(() => invite(), 800);
+
   return (
     <div className="columns col-gapless full-height">
       <div className="column col-9 stream">
-        <video className="stream-video"/>
-        <video className="local-video m-2"/>
+        <video className="stream-video" ref={video => remoteStream = video}/>
+        <video className="local-video m-2" ref={video => localStream = video}/>
       </div>
       <div className="column col-3">
         <div className="status center-inside">
