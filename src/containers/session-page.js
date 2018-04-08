@@ -27,6 +27,8 @@ class SessionPage extends Component {
 const mapStateToProps = state => ({
   session: state.session,
   token: state.token,
+  localStream: state.stream.local,
+  remoteStream: state.stream.local,
   user: {
     id: state.user.credentials.id,
     role: state.user.credentials.userRole

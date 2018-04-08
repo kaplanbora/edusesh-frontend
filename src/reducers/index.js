@@ -8,6 +8,7 @@ import {combineReducers} from "redux";
 import {reducer as formReducer} from "redux-form";
 import targetUserReducer from "./target";
 import {sessionReducer} from "./session";
+import {streamReducer} from "./stream";
 
 const eduseshReducers = combineReducers({
   user: userReducer,
@@ -18,6 +19,7 @@ const eduseshReducers = combineReducers({
   topics: topicsReducer,
   targetUser: targetUserReducer,
   session: sessionReducer,
+  stream: streamReducer,
   form: formReducer
 });
 

@@ -1,7 +1,7 @@
 import {deleteWithToken, postWithTokenDispatch, putWithToken} from "./topics";
 import {APPROVE_SESION, LOAD_SESSION, REMOVE_SESSION, SET_TARGET_READY, SET_USER_READY, START_SESSION} from "./types";
 import {getWithToken} from "./load";
-import {sendToServer} from "../components/live-session";
+import {sendToServer} from "./signal";
 
 export const loadSession = (token, id) => {
   const response = getWithToken(token, "/sessions/" + id)
