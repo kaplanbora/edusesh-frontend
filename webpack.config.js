@@ -34,6 +34,6 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     contentBase: "./dist",
-    host : "192.168.1.42"
+    host: "0.0.0.0"
   }
 };

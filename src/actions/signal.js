@@ -18,6 +18,9 @@ export const sendToServer = message => {
 };
 
 export const startConnection = (session, user, token, dispatch, localStream, remoteStream) => {
+  console.log("Streams");
+  console.log(localStream);
+  console.log(remoteStream);
   if (socket) {
     return;
   }
@@ -40,6 +43,9 @@ export const startConnection = (session, user, token, dispatch, localStream, rem
         break;
       case "start_session":
         sessionReady(dispatch, user, session, message.payload, token);
+        if (user.role === "instructor") {
+          invite();
+        }
         break;
       case "video-offer":  // Invitation and offer to chat
         handleVideoOfferMsg(message);
@@ -267,7 +273,7 @@ export const startConnection = (session, user, token, dispatch, localStream, rem
     closeVideoCall();
   };
 
-  return () => {
+  const invite = () => {
     log("Starting to prepare an invitation");
     if (peerConnection) {
       console.log("You can't start a call because you already have one open!");

@@ -15,9 +15,8 @@ export const LiveSession = ({session, user, token, dispatch}) => {
 
   let localStream = null;
   let remoteStream = null;
-  let invite = null;
 
-  setTimeout(() => invite = startConnection(session, user, token, dispatch, localStream, remoteStream), 200);
+  setTimeout(() => startConnection(session, user, token, dispatch, localStream, remoteStream), 200);
 
   if (isFutureDate(session.date)) {
     return (
@@ -57,8 +56,6 @@ export const LiveSession = ({session, user, token, dispatch}) => {
       </div>
     )
   }
-
-  setTimeout(() => invite(), 800);
 
   return (
     <div className="columns col-gapless full-height">
