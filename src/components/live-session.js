@@ -60,8 +60,8 @@ export const LiveSession = ({session, user, token, dispatch}) => {
   return (
     <div className="columns col-gapless full-height">
       <div className="column col-9 stream">
-        <video className="stream-video" ref={video => remoteStream = video}/>
-        <video className="local-video m-2" ref={video => localStream = video}/>
+        <video className="stream-video" ref={video => remoteStream = video} autoPlay={true} controls={true}/>
+        <video className="local-video m-2" ref={video => localStream = video} autoPlay={true} controls={true} muted={true}/>
       </div>
       <div className="column col-3">
         <div className="status center-inside">

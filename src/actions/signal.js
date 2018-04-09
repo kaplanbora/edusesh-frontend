@@ -1,5 +1,4 @@
 import {initiateConnection, onTargetReady, sessionReady} from "./sessions";
-import {REMOTE_STREAM_RECEIVED} from "./types";
 
 let socket = null;
 let peerConnection = null;
