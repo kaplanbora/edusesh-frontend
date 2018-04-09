@@ -112,12 +112,12 @@ export const startConnection = (session, user, token, dispatch, localStream, rem
 
   const handleTrackEvent = event => {
     log("*** Track event");
-    remoteStream.srcObject = event.streams[0];
+    remoteStream.current.srcObject = event.streams[0];
   };
 
   const handleAddStreamEvent = event => {
     log("*** Stream added");
-    remoteStream.srcObject = event.stream;
+    remoteStream.current.srcObject = event.stream;
   };
 
   const handleRemoveStreamEvent = event => {
@@ -173,15 +173,15 @@ export const startConnection = (session, user, token, dispatch, localStream, rem
       peerConnection.onnotificationneeded = null;
 
       if (remoteStream.srcObject) {
-        remoteStream.srcObject.getTracks().forEach(track => track.stop());
+        remoteStream.current.srcObject.getTracks().forEach(track => track.stop());
       }
 
       if (localStream.srcObject) {
-        localStream.srcObject.getTracks().forEach(track => track.stop());
+        localStream.current.srcObject.getTracks().forEach(track => track.stop());
       }
 
-      remoteStream.src = null;
-      localStream.src = null;
+      remoteStream.current.src = null;
+      localStream.current.src = null;
       peerConnection.close();
       peerConnection = null;
     }
@@ -214,8 +214,8 @@ export const startConnection = (session, user, token, dispatch, localStream, rem
       .then(stream => {
         log("-- Local video stream obtained");
         localMedia = stream;
-        localStream.src = window.URL.createObjectURL(localMedia);
-        localStream.srcObject = localMedia;
+        localStream.current.src = window.URL.createObjectURL(localMedia);
+        localStream.current.srcObject = localMedia;
 
         if (hasAddTrack) {
           log("-- Adding tracks to the RTCPeerConnection");
@@ -287,8 +287,8 @@ export const startConnection = (session, user, token, dispatch, localStream, rem
     navigator.mediaDevices.getUserMedia(mediaConstraints)
       .then(localMedia => {
         log("-- Local video stream obtained");
-        localStream.src = window.URL.createObjectURL(localMedia);
-        localStream.srcObject = localMedia;
+        localStream.current.src = window.URL.createObjectURL(localMedia);
+        localStream.current.srcObject = localMedia;
 
         if (hasAddTrack) {
           log("-- Adding tracks to the RTCPeerConnection");
