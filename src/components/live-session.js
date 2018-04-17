@@ -25,7 +25,7 @@ export class LiveSession extends Component {
       );
     }
 
-    let localStream = <video className="local-video m-2 shadowed" autoPlay={true} controls={true} muted={true} ref={this.localRef}/>;
+    let localStream = <video className="local-video m-2 shadowed" autoPlay={true} muted={true} ref={this.localRef}/>;
     let remoteStream = <video className="stream-video" autoPlay={true} controls={true} ref={this.remoteRef}/>;
 
     setTimeout(() => startConnection(session, user, token, dispatch, this.localRef, this.remoteRef), 200);
@@ -71,12 +71,12 @@ export class LiveSession extends Component {
 
     return (
       <div className="columns col-gapless full-height">
-        <div className="column col-9 stream">
-          {localStream}
+        <div className="column col-9 stream flex-centered">
           {remoteStream}
         </div>
         <div className="column col-3">
           <div className="status center-inside">
+            {localStream}
             <h4>{session.name}</h4>
             <h4>00:13:37</h4>
             <button className="btn btn-primary btn-block">End Session</button>

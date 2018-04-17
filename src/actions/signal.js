@@ -1,10 +1,11 @@
 import {initiateConnection, onTargetReady, sessionReady} from "./sessions";
+import {WS_URL} from "./types";
 
 let socket = null;
 let peerConnection = null;
 let hasAddTrack = false;
 
-const mediaConstraints = {
+let mediaConstraints = {
   audio: true,
   video: true
 };
@@ -25,7 +26,7 @@ export const startConnection = (session, user, token, dispatch, localStream, rem
   }
 
   console.log("-------Starting socket");
-  socket = new WebSocket("ws://192.168.1.42:6503", "json");
+  socket = new WebSocket(WS_URL, "json");
   console.log(user);
   setTimeout(() => initiateConnection(user, session), 200);
 

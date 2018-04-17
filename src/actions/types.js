@@ -1,5 +1,6 @@
-// export const API_URL = "http://localhost:9000";
-export const API_URL = "http://192.168.1.42:9000";
+const IP = "192.168.1.30";
+export const API_URL = `http://${IP}:9000`;
+export const WS_URL = `ws://${IP}:6503`;
 
 export const EDIT_SESSION_SETTINGS = "EDIT_SESSION_SETTINGS";
 export const EDIT_PROFILE = "EDIT_PROFILE";

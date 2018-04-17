@@ -2,9 +2,9 @@ import React from "react";
 
 export const ChatPanel = () => {
   return (
-    <div className="panel">
+    <div className="panel chat">
       <div className="panel-header">
-        <div className="panel-title h6">Comments</div>
+        <div className="panel-title h6">Chat</div>
       </div>
       <div className="panel-body">
         <div className="tile">
