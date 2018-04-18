@@ -1,5 +1,13 @@
 import {deleteWithToken, postWithTokenDispatch, putWithToken} from "./topics";
-import {APPROVE_SESION, LOAD_SESSION, REMOVE_SESSION, SET_TARGET_READY, SET_USER_READY, START_SESSION} from "./types";
+import {
+  APPROVE_SESION,
+  LOAD_MESSAGES,
+  LOAD_SESSION, RECEIVE_MESSAGE,
+  REMOVE_SESSION, SEND_MESSAGE,
+  SET_TARGET_READY,
+  SET_USER_READY,
+  START_SESSION
+} from "./types";
 import {getWithToken} from "./load";
 import {sendToServer} from "./signal";
 
@@ -90,3 +98,28 @@ export const initiateConnection = (user, session) => {
   });
 };
 
+export const sendMessage = (dispatch, token, message) => {
+  postWithTokenDispatch(dispatch, token, "/chats/:id/messages", {
+    body: message
+  });
+
+  sendToServer({
+    type: "chat-message",
+    payload: message
+  });
+
+  dispatch({
+    type: SEND_MESSAGE,
+    payload: message
+  })
+};
+
+export const receiveMessage = (dispatch, message) => ({
+  type: RECEIVE_MESSAGE,
+  payload: message
+});
+
+export const loadMessages = (token, sesssionId) => ({
+  type: LOAD_MESSAGES,
+  payload: getWithToken(token, `/chats/${sesssionId}/messages`)
+});

@@ -17,7 +17,7 @@ export const sendToServer = message => {
   socket.send(msgJSON);
 };
 
-export const startConnection = (session, user, token, dispatch, localStream, remoteStream) => {
+export const startConnection = (session, user, token, dispatch, localStream, remoteStream, receiveMessage) => {
   console.log("Streams");
   console.log(localStream);
   console.log(remoteStream);
@@ -46,6 +46,9 @@ export const startConnection = (session, user, token, dispatch, localStream, rem
         if (user.role === "instructor") {
           invite();
         }
+        break;
+      case "chat-message":
+        receiveMessage(message.payload);
         break;
       case "video-offer":  // Invitation and offer to chat
         handleVideoOfferMsg(message);

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {EmptyState} from "../components/empty-state";
 import {onUserReady} from "../actions/sessions";
-import {ChatPanel} from "./chat-panel";
+import ChatPanel from "./chat-panel";
 import {startConnection} from "../actions/signal";
 
 const isFutureDate = date => Date.now() - Date.parse(date) < 0;
@@ -18,17 +18,16 @@ export class LiveSession extends Component {
     const user = this.props.user;
     const token = this.props.token;
     const dispatch = this.props.dispatch;
+    const chat = this.props.chat;
+    const onSend = this.props.sendMessage;
+    const onReceive = this.props.receiveMessage;
+    const target = this.props.target;
 
-    if (!session || !user || !token || !dispatch) {
-      return (
-        <div className="loading loading-lg flex-centered full-height"/>
-      );
-    }
 
     let localStream = <video className="local-video m-2 shadowed" autoPlay={true} muted={true} ref={this.localRef}/>;
     let remoteStream = <video className="stream-video" autoPlay={true} controls={true} ref={this.remoteRef}/>;
 
-    setTimeout(() => startConnection(session, user, token, dispatch, this.localRef, this.remoteRef), 200);
+    setTimeout(() => startConnection(session, user, token, dispatch, this.localRef, this.remoteRef, onReceive), 200);
 
     if (isFutureDate(session.date)) {
       return (
@@ -78,11 +77,11 @@ export class LiveSession extends Component {
           <div className="status center-inside">
             {localStream}
             <h4>{session.name}</h4>
-            <h4>00:13:37</h4>
+            <h4>{session.startDate}</h4>
             <button className="btn btn-primary btn-block">End Session</button>
           </div>
 
-          <ChatPanel/>
+          <ChatPanel chat={chat} onSubmit={onSend} user={user} target={target}/>
 
         </div>
       </div>

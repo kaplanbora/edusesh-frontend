@@ -9,6 +9,7 @@ import {reducer as formReducer} from "redux-form";
 import targetUserReducer from "./target";
 import {sessionReducer} from "./session";
 import {streamReducer} from "./stream";
+import {chatReducer} from "./chat";
 
 const eduseshReducers = combineReducers({
   user: userReducer,
@@ -20,6 +21,7 @@ const eduseshReducers = combineReducers({
   targetUser: targetUserReducer,
   session: sessionReducer,
   stream: streamReducer,
+  chat: chatReducer,
   form: formReducer
 });
 
