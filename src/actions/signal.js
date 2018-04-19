@@ -18,16 +18,12 @@ export const sendToServer = message => {
 };
 
 export const startConnection = (session, user, token, dispatch, localStream, remoteStream, receiveMessage) => {
-  console.log("Streams");
-  console.log(localStream);
-  console.log(remoteStream);
   if (socket) {
     return;
   }
 
   console.log("-------Starting socket");
   socket = new WebSocket(WS_URL, "json");
-  console.log(user);
   setTimeout(() => initiateConnection(user, session), 200);
 
   socket.onmessage = event => {

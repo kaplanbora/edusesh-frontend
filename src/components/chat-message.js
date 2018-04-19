@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ChatMessage = (avatar, name, message) => {
+export const ChatMessage = ({avatar, name, message}) => {
   return (
     <div className="tile">
       <div className="tile-icon">

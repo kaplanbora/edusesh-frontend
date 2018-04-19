@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {loadMessages, loadSession, receiveMessage, sendMessage} from "../actions/sessions";
 import {LiveSession} from "../components/live-session";
-import {getTargetProfile} from "../actions/load";
+import {getTargetCredentials, getTargetProfile} from "../actions/load";
 
 class SessionPage extends Component {
   constructor(props) {
@@ -20,10 +20,11 @@ class SessionPage extends Component {
         <div className="loading loading-lg flex-centered full-height"/>
       );
     } else if (!this.props.target && this.props.session) {
-        const targetId = this.props.user.role === "instructor" ?
-          this.props.session.instructorId :
-          this.props.session.traineeId;
-        this.props.loadTarget(targetId);
+      const targetId = this.props.user.role === "instructor" ?
+        this.props.session.instructorId :
+        this.props.session.traineeId;
+      this.props.loadTargetProfile(targetId);
+      this.props.loadTargetCredentials(targetId);
     }
 
     return (
@@ -34,6 +35,8 @@ class SessionPage extends Component {
         dispatch={this.props.dispatch}
         chat={this.props.chat}
         target={this.props.target}
+        sendMessage={this.props.sendMessage}
+        receiveMessage={this.props.receiveMessage}
       />
     );
   }
@@ -41,7 +44,7 @@ class SessionPage extends Component {
 
 const mapStateToProps = state => ({
   session: state.session,
-  target: state.targetUser.profile,
+  target: state.targetUser,
   token: state.token,
   localStream: state.stream.local,
   remoteStream: state.stream.local,
@@ -57,9 +60,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   load: token => dispatch(loadSession(token, ownProps.match.params.id)),
   loadChat: token => dispatch(loadMessages(token, ownProps.match.params.id)),
-  sendMessage: (token, message) => sendMessage(dispatch, token, message),
+  sendMessage: (token, message) => sendMessage(dispatch, ownProps.token, message),
   receiveMessage: message => dispatch(receiveMessage(message)),
-  loadTarget: id => dispatch(getTargetProfile(id)),
+  loadTargetProfile: id => dispatch(getTargetProfile(id)),
+  loadTargetCredentials: id => dispatch(getTargetCredentials(id)),
   dispatch: dispatch
 });
 
