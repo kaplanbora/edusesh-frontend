@@ -5,7 +5,7 @@ const initialValue = [];
 export const chatReducer = (state = initialValue, action) => {
   switch (action.type) {
     case LOAD_MESSAGES:
-      return action.payload.data;
+      return action.payload.data.reverse();
     case SEND_MESSAGE:
       const sent = {
         senderId: action.payload.senderId,

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {loadMessages, loadSession, receiveMessage, sendMessage} from "../actions/sessions";
+import {endSession, loadMessages, loadSession, receiveMessage, sendMessage} from "../actions/sessions";
 import {LiveSession} from "../components/live-session";
 import {getTargetCredentials, getTargetProfile} from "../actions/load";
 
@@ -15,7 +15,7 @@ class SessionPage extends Component {
   }
 
   render() {
-    if (!this.props.session || !this.props.user || !this.props.token || !this.props.dispatch || !this.props.chat || !this.props.sendMessage || !this.props.receiveMessage) {
+    if (!this.props.session || !this.props.user || !this.props.token || !this.props.dispatch || !this.props.chat || !this.props.sendMessage || !this.props.receiveMessage || !this.props.finish) {
       return (
         <div className="loading loading-lg flex-centered full-height"/>
       );
@@ -45,6 +45,7 @@ class SessionPage extends Component {
         target={this.props.target}
         sendMessage={this.props.sendMessage}
         receiveMessage={this.props.receiveMessage}
+        finish={this.props.finish}
       />
     );
   }
@@ -71,6 +72,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   receiveMessage: message => dispatch(receiveMessage(message)),
   loadTargetProfile: id => dispatch(getTargetProfile(id)),
   loadTargetCredentials: id => dispatch(getTargetCredentials(id)),
+  finish: token => endSession(token, dispatch, ownProps.match.params.id),
   dispatch: dispatch
 });
 

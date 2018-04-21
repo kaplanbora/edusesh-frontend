@@ -1,6 +1,6 @@
 import {deleteWithToken, postWithTokenDispatch, putWithToken} from "./topics";
 import {
-  APPROVE_SESION,
+  APPROVE_SESION, END_SESSION,
   LOAD_MESSAGES,
   LOAD_SESSION, RECEIVE_MESSAGE,
   REMOVE_SESSION, SEND_MESSAGE,
@@ -133,3 +133,15 @@ export const loadMessages = (token, sesssionId) => ({
   type: LOAD_MESSAGES,
   payload: getWithToken(token, `/chats/${sesssionId}/messages`)
 });
+
+export const endSession = (token, dispatch, id) => {
+  putWithToken(token, "/sessions/" + id, {
+    isApproved: true,
+    isCompleted: true,
+    isStarted: true
+  });
+
+  sendToServer({type: "end-session"});
+
+  dispatch({type: END_SESSION});
+};

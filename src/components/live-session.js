@@ -13,7 +13,7 @@ export class LiveSession extends Component {
     this.remoteRef = React.createRef();
   }
 
-  render () {
+  render() {
     const session = this.props.session;
     const user = this.props.user;
     const token = this.props.token;
@@ -22,6 +22,7 @@ export class LiveSession extends Component {
     const onSend = this.props.sendMessage;
     const onReceive = this.props.receiveMessage;
     const target = this.props.target;
+    const finish = this.props.finish;
 
     let localStream = <video className="local-video m-2 shadowed" autoPlay={true} muted={true} ref={this.localRef}/>;
     let remoteStream = <video className="stream-video" autoPlay={true} controls={true} ref={this.remoteRef}/>;
@@ -75,11 +76,21 @@ export class LiveSession extends Component {
         <div className="column col-3">
           <div className="status center-inside">
             {localStream}
-            <h4>{session.name}</h4>
-            <h4>{session.startDate}</h4>
-            <button className="btn btn-primary btn-block">End Session</button>
+            <h6 className="p-2">{session.name}</h6>
+            {user.role === "instructor" && session.isCompleted &&
+            <button className="btn btn-primary btn-block">See User Review</button>}
+            {user.role === "instructor" && !session.isCompleted &&
+            <button className="btn btn-primary btn-block" onClick={() => finish(token)}>End Session</button>}
+            {user.role === "trainee" && session.isCompleted &&
+            <button className="btn btn-primary btn-block">Review Session</button>}
           </div>
-          <ChatPanel chat={chat} onSubmit={(values) => onSend(token, values.message, session.id, user.id)} user={user} target={target} session={session}/>
+          <ChatPanel
+            isCompleted={session.isCompleted}
+            chat={chat}
+            onSubmit={(values) => onSend(token, values.message, session.id, user.id)}
+            user={user}
+            target={target}
+          />
         </div>
       </div>
     );

@@ -5,7 +5,7 @@ import {ChatMessage} from "./chat-message";
 
 const GenericInput = ({input}) => (<input {...input} className="form-input" type="text"/>);
 
-const ChatPanel = ({handleSubmit, chat, user, target}) => {
+const ChatPanel = ({handleSubmit, chat, user, target, isCompleted}) => {
   return (
     <div className="panel chat">
 
@@ -22,12 +22,14 @@ const ChatPanel = ({handleSubmit, chat, user, target}) => {
         )}
       </div>
 
+      {!isCompleted &&
       <div className="panel-footer">
         <form onSubmit={handleSubmit} className="input-group">
           <Field name="message" component={GenericInput}/>
           <button className="btn btn-primary input-group-btn">Send</button>
         </form>
       </div>
+      }
     </div>
   );
 };

@@ -112,6 +112,6 @@ html, body {
 }
 
 .chat {
-    height: 340px;
+    height: 320px;
     overflow-y: auto;
 }

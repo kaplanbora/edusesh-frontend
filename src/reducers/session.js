@@ -1,4 +1,4 @@
-import {LOAD_SESSION, SET_TARGET_READY, SET_USER_READY, START_SESSION} from "../actions/types";
+import {END_SESSION, LOAD_SESSION, SET_TARGET_READY, SET_USER_READY, START_SESSION} from "../actions/types";
 
 const initialValue = null;
 
@@ -52,6 +52,23 @@ export const sessionReducer = (state = initialValue, action) => {
         topicId: state.topicId,
         isApproved: state.isApproved,
         isCompleted: state.isCompleted,
+        isDeleted: state.isDeleted,
+        isStarted: true,
+        userReady: state.userReady,
+        targetReady: state.targetReady
+      };
+    case END_SESSION:
+      return {
+        id: state.id,
+        name: state.name,
+        description: state.description,
+        traineeId: state.traineeId,
+        instructorId: state.instructorId,
+        date: state.date,
+        startDate: state.startDate,
+        topicId: state.topicId,
+        isApproved: true,
+        isCompleted: true,
         isDeleted: state.isDeleted,
         isStarted: true,
         userReady: state.userReady,
