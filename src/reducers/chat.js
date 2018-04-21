@@ -11,13 +11,13 @@ export const chatReducer = (state = initialValue, action) => {
         senderId: action.payload.senderId,
         body: action.payload.body
       };
-      return [...state, sent];
+      return [sent, ...state];
     case RECEIVE_MESSAGE:
       const received = {
         senderId: action.payload.senderId,
         body: action.payload.body
       };
-      return [...state, received];
+      return [received, ...state];
     default:
       return state;
   }

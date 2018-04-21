@@ -10,6 +10,7 @@ import {
 } from "./types";
 import {getWithToken} from "./load";
 import {sendToServer} from "./signal";
+import {reset} from "redux-form";
 
 export const loadSession = (token, id) => {
   const response = getWithToken(token, "/sessions/" + id)
@@ -116,7 +117,9 @@ export const sendMessage = (dispatch, token, message, sessionId, userId) => {
   dispatch({
     type: SEND_MESSAGE,
     payload
-  })
+  });
+
+  dispatch(reset("chatForm"));
 };
 
 export const receiveMessage = message => {

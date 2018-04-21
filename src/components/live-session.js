@@ -23,9 +23,6 @@ export class LiveSession extends Component {
     const onReceive = this.props.receiveMessage;
     const target = this.props.target;
 
-    console.log(target);
-
-
     let localStream = <video className="local-video m-2 shadowed" autoPlay={true} muted={true} ref={this.localRef}/>;
     let remoteStream = <video className="stream-video" autoPlay={true} controls={true} ref={this.remoteRef}/>;
 
@@ -82,9 +79,7 @@ export class LiveSession extends Component {
             <h4>{session.startDate}</h4>
             <button className="btn btn-primary btn-block">End Session</button>
           </div>
-
           <ChatPanel chat={chat} onSubmit={(values) => onSend(token, values.message, session.id, user.id)} user={user} target={target} session={session}/>
-
         </div>
       </div>
     );

@@ -23,14 +23,11 @@ const ChatPanel = ({handleSubmit, chat, user, target}) => {
       </div>
 
       <div className="panel-footer">
-        <div className="input-group">
-          <form onSubmit={handleSubmit}>
-            <Field name="message" component={GenericInput}/>
-            <button className="btn btn-primary input-group-btn">Send</button>
-          </form>
-        </div>
+        <form onSubmit={handleSubmit} className="input-group">
+          <Field name="message" component={GenericInput}/>
+          <button className="btn btn-primary input-group-btn">Send</button>
+        </form>
       </div>
-
     </div>
   );
 };
