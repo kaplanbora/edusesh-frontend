@@ -98,19 +98,24 @@ export const initiateConnection = (user, session) => {
   });
 };
 
-export const sendMessage = (dispatch, token, message) => {
-  postWithTokenDispatch(dispatch, token, "/chats/:id/messages", {
+export const sendMessage = (dispatch, token, message, sessionId, userId) => {
+  postWithTokenDispatch(dispatch, token, `/chats/${sessionId}/messages`, {
     body: message
   });
 
+  const payload = {
+    senderId: userId,
+    body: message
+  };
+
   sendToServer({
     type: "chat-message",
-    payload: message
+    payload
   });
 
   dispatch({
     type: SEND_MESSAGE,
-    payload: message
+    payload
   })
 };
 

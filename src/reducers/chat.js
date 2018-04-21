@@ -8,14 +8,14 @@ export const chatReducer = (state = initialValue, action) => {
       return action.payload.data;
     case SEND_MESSAGE:
       const sent = {
-        owner: "self",
-        body: action.payload
+        senderId: action.payload.senderId,
+        body: action.payload.body
       };
       return [...state, sent];
     case RECEIVE_MESSAGE:
       const received = {
-        owner: "target",
-        body: action.payload
+        senderId: action.payload.senderId,
+        body: action.payload.body
       };
       return [...state, received];
     default:

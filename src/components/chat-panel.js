@@ -15,15 +15,9 @@ const ChatPanel = ({handleSubmit, chat, user, target}) => {
 
       <div className="panel-body">
         {chat.map((message, index) => {
-            let name, avatar;
-            if (!message.id) {
-              name = message.owner === "self" ? user.name : `${target.profile.firstName} ${target.profile.lastName}`;
-              avatar = message.owner === "self" ? `https://robohash.org/${user.id}?set=set3` : `https://robohash.org/${target.credentials.id}?set=set3`;
-            } else {
-              name = user.id == message.senderId ? user.name : `${target.profile.firstName} ${target.profile.lastName}`;
-              avatar = user.id == message.senderId ? `https://robohash.org/${user.id}?set=set3` : `https://robohash.org/${target.credentials.id}?set=set3`;
-            }
-           return <ChatMessage key={index} avatar={avatar} name={name} message={message.body}/>
+            const name = user.id === message.senderId ? user.name : `${target.profile.firstName} ${target.profile.lastName}`;
+            const avatar = user.id === message.senderId ? `https://robohash.org/${user.id}?set=set3` : `https://robohash.org/${target.credentials.id}?set=set3`;
+            return <ChatMessage key={index} avatar={avatar} name={name} message={message.body}/>
           }
         )}
       </div>

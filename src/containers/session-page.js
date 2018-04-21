@@ -21,12 +21,18 @@ class SessionPage extends Component {
       );
     }
 
-    if(!this.props.target.profile) {
+    if (!this.props.target.profile && this.props.user.role) {
       const targetId = this.props.user.role === "instructor" ?
-        this.props.session.instructorId :
-        this.props.session.traineeId;
+        this.props.session.traineeId :
+        this.props.session.instructorId;
       this.props.loadTargetProfile(targetId);
       this.props.loadTargetCredentials(targetId);
+    }
+
+    if (this.props.target.credentials == null || this.props.target.profile == null) {
+      return (
+        <div className="loading loading-lg flex-centered full-height"/>
+      );
     }
 
     return (
@@ -55,14 +61,13 @@ const mapStateToProps = state => ({
     id: state.user.credentials.id,
     role: state.user.credentials.userRole,
     name: `${state.user.profile.firstName} ${state.user.profile.lastName}`,
-    avatar: state.user.profile.imageLink
   }
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   load: token => dispatch(loadSession(token, ownProps.match.params.id)),
   loadChat: token => dispatch(loadMessages(token, ownProps.match.params.id)),
-  sendMessage: (token, message) => sendMessage(dispatch, ownProps.token, message),
+  sendMessage: (token, message, sessionId, userId) => sendMessage(dispatch, token, message, sessionId, userId),
   receiveMessage: message => dispatch(receiveMessage(message)),
   loadTargetProfile: id => dispatch(getTargetProfile(id)),
   loadTargetCredentials: id => dispatch(getTargetCredentials(id)),
