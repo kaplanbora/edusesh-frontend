@@ -13,7 +13,6 @@ const ChatPanel = ({handleSubmit, chat, user, target}) => {
         <div className="panel-title h6">Chat</div>
       </div>
 
-      {console.log(chat)}
       <div className="panel-body">
         {chat.map((message, index) => {
             let name, avatar;

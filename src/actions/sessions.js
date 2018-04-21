@@ -114,10 +114,12 @@ export const sendMessage = (dispatch, token, message) => {
   })
 };
 
-export const receiveMessage = (dispatch, message) => ({
-  type: RECEIVE_MESSAGE,
-  payload: message
-});
+export const receiveMessage = message => {
+  return {
+    type: RECEIVE_MESSAGE,
+    payload: message
+  }
+};
 
 export const loadMessages = (token, sesssionId) => ({
   type: LOAD_MESSAGES,

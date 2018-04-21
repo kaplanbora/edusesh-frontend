@@ -19,7 +19,9 @@ class SessionPage extends Component {
       return (
         <div className="loading loading-lg flex-centered full-height"/>
       );
-    } else if (!this.props.target && this.props.session) {
+    }
+
+    if(!this.props.target.profile) {
       const targetId = this.props.user.role === "instructor" ?
         this.props.session.instructorId :
         this.props.session.traineeId;
