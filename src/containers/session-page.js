@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {endSession, loadMessages, loadSession, receiveMessage, sendMessage} from "../actions/sessions";
 import {LiveSession} from "../components/live-session";
 import {getTargetCredentials, getTargetProfile} from "../actions/load";
+import {Loading} from "../components/loading";
 
 class SessionPage extends Component {
   constructor(props) {
@@ -30,9 +31,7 @@ class SessionPage extends Component {
     }
 
     if (this.props.target.credentials == null || this.props.target.profile == null) {
-      return (
-        <div className="loading loading-lg flex-centered full-height"/>
-      );
+      return <Loading/>
     }
 
     return (

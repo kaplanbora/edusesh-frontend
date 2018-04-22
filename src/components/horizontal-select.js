@@ -8,8 +8,8 @@ const HorizontalSelect = ({options, input, label, meta: {asyncValidating}}) => {
       </div>
       <div className="col-10">
         <select className="form-select" {...input}>
-          {options.map(topic =>
-            <option key={topic.id} value={topic.id}>{topic.name}</option>
+          {options.map(option =>
+            <option key={option.id} value={option.id}>{option.name}</option>
           )}
         </select>
         {asyncValidating && <i className="form-icon loading"/>}

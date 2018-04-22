@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import Modal from "../components/modal";
 import {UserReview} from "../components/user-review";
-import {CreateReview} from "../components/create-review";
+import CreateReview from "../components/create-review";
 import {MODAL_CLOSE_REVIEW, MODAL_OPEN_REVIEW} from "../actions/types";
 import {createReview, loadReview} from "../actions/review";
 
@@ -20,11 +20,14 @@ class SessionReview extends Component {
     const review = this.props.review;
     const open = this.props.openModal;
     const close = this.props.closeModal;
-    const isOpen= this.props.modal;
+    const isOpen = this.props.modal;
+    const create = this.props.create;
+
+    console.log(review);
 
     return (
       <div>
-        {userRole === "instructor" &&
+        {userRole === "instructor" && review &&
         <button className="btn btn-primary btn-block" onClick={open}>See User Review</button>}
         {userRole === "trainee" &&
         <button className="btn btn-primary btn-block" onClick={open}>Review Session</button>}
@@ -32,7 +35,16 @@ class SessionReview extends Component {
           {userRole === "instructor" &&
           <UserReview review={review}/>}
           {userRole === "trainee" &&
-          <CreateReview review={review}/>}
+          <CreateReview
+            initialValues={
+              review ? {
+              rating: review.rating,
+              title: review.title,
+              comment: review.comment
+              } : {}
+            }
+            onSubmit={values => create(values, review)}
+          />}
         </Modal>
       </div>
     )
@@ -41,12 +53,12 @@ class SessionReview extends Component {
 
 const mapStateToProps = state => ({
   review: state.review,
-  modal: state.modal.review
+  modal: state.modals.review
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   load: () => dispatch(loadReview(ownProps.token, ownProps.sessionId)),
-  create: values => dispatch(createReview(ownProps.token, ownProps.sessionId, values)),
+  create: (values, review) => dispatch(createReview(ownProps.token, ownProps.sessionId, review, values)),
   openModal: () => dispatch({type: MODAL_OPEN_REVIEW}),
   closeModal: () => dispatch({type: MODAL_CLOSE_REVIEW})
 });

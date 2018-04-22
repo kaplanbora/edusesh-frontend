@@ -81,7 +81,7 @@ export class LiveSession extends Component {
             {user.role === "instructor" && !session.isCompleted &&
             <button className="btn btn-primary btn-block" onClick={() => finish(token)}>End Session</button>}
             {session.isCompleted &&
-            <SessionReview sessionId={session.id}/>}
+            <SessionReview sessionId={session.id} token={token} userRole={user.role}/>}
           </div>
           <ChatPanel
             isCompleted={session.isCompleted}
