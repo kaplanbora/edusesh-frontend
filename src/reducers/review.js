@@ -5,7 +5,7 @@ const initialState = null;
 export const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_REVIEW:
-      return action.payload ? action.payload.data : initialState;
+      return action.payload.data;
     case CREATE_REVIEW:
       return {
         id: action.payload.id,

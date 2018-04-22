@@ -5,6 +5,7 @@ import {UserReview} from "../components/user-review";
 import CreateReview from "../components/create-review";
 import {MODAL_CLOSE_REVIEW, MODAL_OPEN_REVIEW} from "../actions/types";
 import {createReview, loadReview} from "../actions/review";
+import {Loading} from "../components/loading";
 
 class SessionReview extends Component {
   constructor(props) {
@@ -22,8 +23,11 @@ class SessionReview extends Component {
     const close = this.props.closeModal;
     const isOpen = this.props.modal;
     const create = this.props.create;
+    const target = this.props.target;
 
-    console.log(review);
+    if (review === null) {
+      return <Loading/>
+    }
 
     return (
       <div>
@@ -33,7 +37,7 @@ class SessionReview extends Component {
         <button className="btn btn-primary btn-block" onClick={open}>Review Session</button>}
         <Modal modal={isOpen} closeModal={close}>
           {userRole === "instructor" &&
-          <UserReview review={review}/>}
+          <UserReview review={review} trainee={target}/>}
           {userRole === "trainee" &&
           <CreateReview
             initialValues={
