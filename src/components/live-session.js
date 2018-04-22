@@ -3,6 +3,7 @@ import {EmptyState} from "../components/empty-state";
 import {onUserReady} from "../actions/sessions";
 import ChatPanel from "./chat-panel";
 import {startConnection} from "../actions/signal";
+import SessionReview from "../containers/session-review";
 
 const isFutureDate = date => Date.now() - Date.parse(date) < 0;
 
@@ -77,12 +78,10 @@ export class LiveSession extends Component {
           <div className="status center-inside">
             {localStream}
             <h6 className="p-2">{session.name}</h6>
-            {user.role === "instructor" && session.isCompleted &&
-            <button className="btn btn-primary btn-block">See User Review</button>}
             {user.role === "instructor" && !session.isCompleted &&
             <button className="btn btn-primary btn-block" onClick={() => finish(token)}>End Session</button>}
-            {user.role === "trainee" && session.isCompleted &&
-            <button className="btn btn-primary btn-block">Review Session</button>}
+            {session.isCompleted &&
+            <SessionReview sessionId={session.id}/>}
           </div>
           <ChatPanel
             isCompleted={session.isCompleted}

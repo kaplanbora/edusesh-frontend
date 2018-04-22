@@ -10,6 +10,7 @@ import targetUserReducer from "./target";
 import {sessionReducer} from "./session";
 import {streamReducer} from "./stream";
 import {chatReducer} from "./chat";
+import {reviewReducer} from "./review";
 
 const eduseshReducers = combineReducers({
   user: userReducer,
@@ -19,6 +20,7 @@ const eduseshReducers = combineReducers({
   section: sectionReducer,
   topics: topicsReducer,
   targetUser: targetUserReducer,
+  review: reviewReducer,
   session: sessionReducer,
   stream: streamReducer,
   chat: chatReducer,
