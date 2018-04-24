@@ -1,11 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
 import UserHome from "./user-home";
+import {LandingPage} from "../components/LandingPage";
 
 const HomePage = ({token}) =>
   token
     ? <UserHome token={token}/>
-    : <div>Yo</div>;
+    : <LandingPage/>;
 
 
 const mapStateToProps = state => ({

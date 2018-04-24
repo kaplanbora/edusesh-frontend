@@ -115,3 +115,16 @@ html, body {
     height: 320px;
     overflow-y: auto;
 }
+
+.hero {
+    text-align: center;
+    height: 100%;
+    padding: 128px;
+    background: linear-gradient(#454d5d, #f8f9fa);
+    color: whitesmoke;
+}
+
+.register {
+    padding: 32px;
+    margin: 32px;
+}
