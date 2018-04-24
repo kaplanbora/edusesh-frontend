@@ -1,27 +1,49 @@
 import React from "react";
+import {reduxForm} from "redux-form";
+import {Field} from "redux-form";
+import {connect} from "react-redux";
+import {search} from "../actions/search";
 
-const onSearch = (event, input) => {
-  event.preventDefault();
-  console.log(input.value);
-  input.value = "";
+const Select = ({options, input}) => {
+  return (
+    <select className="form-select" {...input}>
+      {options.map(option =>
+        <option key={option.id} value={option.name}>{option.name}</option>
+      )}
+    </select>
+  );
 };
 
-const SearchBar = () => {
-  let searchInput;
+const Input = ({placeholder, input}) => {
   return (
-    <form onSubmit={(e) => onSearch(e, searchInput)}>
+    <input className="form-input" placeholder={placeholder} {...input}/>
+  );
+};
+
+const categories = [
+  {id: 0, name: "Topic"},
+  {id: 1, name: "Instructor"}
+];
+
+const SearchBar = ({handleSubmit}) => {
+  return (
+    <form onSubmit={handleSubmit}>
       <div className="input-group input-inline search-bar">
-        <select className="form-select">
-          <option>Topic</option>
-          <option>Instructor</option>
-        </select>
-        <input className="form-input" placeholder="Find topics or instructors" ref={node => {
-          searchInput = node
-        }}/>
+        <Field name="category" options={categories} component={Select}/>
+        <Field name="query" placeholder="Find topics or instructors" component={Input}/>
         <button className="btn btn-success input-group-btn">Search</button>
       </div>
     </form>
   );
 };
 
-export default SearchBar
+const mapDispatchToProps = dispatch => ({
+  onSubmit: values => search(dispatch, values)
+});
+
+export default connect(null, mapDispatchToProps)(reduxForm({
+  form: "searchBar",
+  initialValues: {
+    category: "Topic"
+  }
+})(SearchBar));
