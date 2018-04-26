@@ -11,6 +11,7 @@ import PublicUser from "./public-user";
 import SessionPage from "./session-page";
 import {BrowserRouter, Route} from "react-router-dom";
 import {tokenFromCookie} from "../actions";
+import {SearchPage} from "./search-page";
 
 class App extends Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class App extends Component {
           <Route exact path="/user" component={SettingsPage}/>
           <Route path="/user/:id" component={PublicUser}/>
           <Route path="/session/:id" component={SessionPage}/>
+          <Route path="/search" component={SearchPage}/>
         </div>
       </BrowserRouter>
     )

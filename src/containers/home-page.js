@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import UserHome from "./user-home";
-import {LandingPage} from "../components/LandingPage";
+import {LandingPage} from "../components/landing-page";
 
 const HomePage = ({token}) =>
   token

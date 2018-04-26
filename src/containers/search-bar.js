@@ -3,6 +3,8 @@ import {reduxForm} from "redux-form";
 import {Field} from "redux-form";
 import {connect} from "react-redux";
 import {search} from "../actions/search";
+import {withRouter} from "react-router";
+import {Loading} from "../components/loading";
 
 const Select = ({options, input}) => {
   return (
@@ -25,9 +27,13 @@ const categories = [
   {id: 1, name: "Instructor"}
 ];
 
-const SearchBar = ({handleSubmit}) => {
+const SearchBar = ({handleSubmit, goSearch, history}) => {
+  if (!history || !goSearch) {
+    return <Loading/>;
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(values => goSearch(values, history))}>
       <div className="input-group input-inline search-bar">
         <Field name="category" options={categories} component={Select}/>
         <Field name="query" placeholder="Find topics or instructors" component={Input}/>
@@ -38,12 +44,14 @@ const SearchBar = ({handleSubmit}) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: values => search(dispatch, values)
+  goSearch: (values, history) => search(dispatch, values, history)
 });
 
-export default connect(null, mapDispatchToProps)(reduxForm({
+const SearchBarForm = reduxForm({
   form: "searchBar",
   initialValues: {
     category: "Topic"
   }
-})(SearchBar));
+})(SearchBar);
+
+export default withRouter(connect(null, mapDispatchToProps)(SearchBarForm));
