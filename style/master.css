@@ -128,3 +128,14 @@ html, body {
     padding: 32px;
     margin: 32px;
 }
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.card {
+    width: 300px;
+    margin: 10px;
+}

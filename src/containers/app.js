@@ -11,7 +11,7 @@ import PublicUser from "./public-user";
 import SessionPage from "./session-page";
 import {BrowserRouter, Route} from "react-router-dom";
 import {tokenFromCookie} from "../actions";
-import {SearchPage} from "./search-page";
+import SearchPage from "./search-page";
 
 class App extends Component {
   constructor(props) {

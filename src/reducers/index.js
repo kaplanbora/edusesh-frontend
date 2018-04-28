@@ -11,6 +11,7 @@ import {sessionReducer} from "./session";
 import {streamReducer} from "./stream";
 import {chatReducer} from "./chat";
 import {reviewReducer} from "./review";
+import {resultsReducer} from "./results";
 
 const eduseshReducers = combineReducers({
   user: userReducer,
@@ -20,6 +21,7 @@ const eduseshReducers = combineReducers({
   section: sectionReducer,
   topics: topicsReducer,
   targetUser: targetUserReducer,
+  searchResults: resultsReducer,
   review: reviewReducer,
   session: sessionReducer,
   stream: streamReducer,
