@@ -139,3 +139,7 @@ html, body {
     width: 300px;
     margin: 10px;
 }
+
+.card-footer {
+    width: 100%;
+}

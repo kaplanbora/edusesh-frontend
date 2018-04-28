@@ -33,10 +33,6 @@ class PublicUser extends Component {
             <SessionRequest topics={topics} token={this.props.token} id={this.props.match.params.id}/>
             <span className="label d-block p-2 text-center">Hourly Rate: {profile.hourlyRate}$</span>
           </div>
-          <div className="column col-9 centered white-bg shadowed p-3">
-            <button className="btn btn-block my-2">Send Message</button>
-            <span className="label d-block p-2 text-center">Hourly Rate: {profile.hourlyRate}$</span>
-          </div>
         </div>
         <div className="column col-6 p-5 centered white-bg m-3 shadowed">
           <img className="centered" width="300" height="300" alt={initials} src={image}/>
