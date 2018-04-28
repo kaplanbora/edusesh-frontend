@@ -18,7 +18,7 @@ export const InstructorCard = ({instructor}) => {
         <div>Hourly Rate: {instructor.hourlyRate}$</div>
       </div>
       <div className="card-footer">
-        <Link to={`/user/${instructor.userId}`} className="btn btn-primary btn-block">Visit Profile</Link>
+        <Link to={`/user/${instructor.userId}`} className="btn btn-success btn-block">Visit Profile</Link>
       </div>
     </div>
   );

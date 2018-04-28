@@ -1,5 +1,13 @@
-import {LOAD_RESULTS} from "./types";
+import {FILTER_RESULTS, LOAD_RESULTS} from "./types";
 import {getWithoutToken} from "./load";
+
+export const filter = (values, url) => ({
+  type: FILTER_RESULTS,
+  payload: getWithoutToken("/users" + url).then(response => {
+    response.filters = values;
+    return response;
+  })
+});
 
 export const search = (dispatch, values, history) => {
   const category = values.category === "instructor" ? "instructor" : "topic";
