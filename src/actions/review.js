@@ -1,10 +1,15 @@
-import {getWithToken} from "./load";
+import {getWithoutToken, getWithToken} from "./load";
 import {CREATE_REVIEW, LOAD_REVIEW} from "./types";
 import {postWithToken, putWithToken} from "./topics";
 
 export const loadReview = (token, sessionId) => ({
   type: LOAD_REVIEW,
   payload: getWithToken(token, `/sessions/${sessionId}/reviews`)
+});
+
+export const loadReviews = instructorId => ({
+  type: LOAD_REVIEW,
+  payload: getWithoutToken(`/users/${instructorId}/reviews`)
 });
 
 export const createReview = (token, sessionId, existingReview, values) => {

@@ -1,8 +1,10 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {getTargetCredentials, getTargetProfile, getTargetTopics} from "../actions/load";
+import ReviewList from "./review-list";
 import Topic from "../components/topic";
 import SessionRequest from "./session-request";
+import {loadReviews} from "../actions/review";
 
 class PublicUser extends Component {
   constructor(props) {
@@ -16,7 +18,7 @@ class PublicUser extends Component {
   }
 
   render() {
-    if (this.props.targetUser.profile === null) {
+    if (this.props.targetUser.profile === null || this.props.targetUser.credentials === null) {
       return (<div className="full-height loading loading-lg"/>)
     }
     const profile = this.props.targetUser.profile;
@@ -32,6 +34,9 @@ class PublicUser extends Component {
           <div className="column col-9 centered white-bg shadowed p-3">
             <SessionRequest topics={topics} token={this.props.token} id={this.props.match.params.id}/>
             <span className="label d-block p-2 text-center">Hourly Rate: {profile.hourlyRate}$</span>
+          </div>
+          <div className="column col-9 centered white-bg shadowed p-3 mt-3">
+            <ReviewList instructorId={credentials.id} loadReviews={this.props.loadReviews} reviews={this.props.reviews}/>
           </div>
         </div>
         <div className="column col-6 p-5 centered white-bg m-3 shadowed">
@@ -55,13 +60,15 @@ class PublicUser extends Component {
 
 const mapStateToProps = state => ({
   targetUser: state.targetUser,
-  token: state.token
+  token: state.token,
+  reviews: state.review
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadCredentials: () => dispatch(getTargetCredentials(ownProps.match.params.id)),
   loadProfile: () => dispatch(getTargetProfile(ownProps.match.params.id)),
-  loadTopics: () => dispatch(getTargetTopics(ownProps.match.params.id))
+  loadTopics: () => dispatch(getTargetTopics(ownProps.match.params.id)),
+  loadReviews: id => dispatch(loadReviews(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublicUser)
