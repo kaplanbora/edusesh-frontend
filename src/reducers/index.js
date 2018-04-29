@@ -12,6 +12,7 @@ import {streamReducer} from "./stream";
 import {chatReducer} from "./chat";
 import {reviewReducer} from "./review";
 import {resultsReducer} from "./results";
+import {reviewListReducer} from "./review-list";
 
 const eduseshReducers = combineReducers({
   user: userReducer,
@@ -23,6 +24,7 @@ const eduseshReducers = combineReducers({
   targetUser: targetUserReducer,
   searchResults: resultsReducer,
   review: reviewReducer,
+  reviewList: reviewListReducer,
   session: sessionReducer,
   stream: streamReducer,
   chat: chatReducer,

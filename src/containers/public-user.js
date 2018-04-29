@@ -61,7 +61,7 @@ class PublicUser extends Component {
 const mapStateToProps = state => ({
   targetUser: state.targetUser,
   token: state.token,
-  reviews: state.review
+  reviews: state.reviewList
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

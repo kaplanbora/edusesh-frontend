@@ -1,5 +1,5 @@
 import {getWithoutToken, getWithToken} from "./load";
-import {CREATE_REVIEW, LOAD_REVIEW} from "./types";
+import {CREATE_REVIEW, LOAD_REVIEW, LOAD_REVIEWS} from "./types";
 import {postWithToken, putWithToken} from "./topics";
 
 export const loadReview = (token, sessionId) => ({
@@ -8,7 +8,7 @@ export const loadReview = (token, sessionId) => ({
 });
 
 export const loadReviews = instructorId => ({
-  type: LOAD_REVIEW,
+  type: LOAD_REVIEWS,
   payload: getWithoutToken(`/users/${instructorId}/reviews`)
 });
 

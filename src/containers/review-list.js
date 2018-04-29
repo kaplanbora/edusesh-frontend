@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {MODAL_CLOSE_REVIEWS, MODAL_OPEN_REVIEWS} from "../actions/types";
 import Modal from "../components/modal";
 import {Loading} from "../components/loading";
+import {ReviewListItem} from "../components/review-list-item";
 
 const average = reviews => {
   const len = reviews.length;
@@ -36,6 +37,11 @@ class ReviewList extends Component {
         <button className="btn btn-block btn-primary btn-lg my-2" onClick={openModal}>See All Reviews</button>
         <span className="d-block label p-2 text-center">Average Rating: {average(reviews)}</span>
         <Modal modal={modal} closeModal={closeModal}>
+          <h2>User Reviews</h2>
+          <div className="divider"/>
+          {reviews.map(review =>
+            <ReviewListItem key={review.id} review={review}/>
+          )}
         </Modal>
       </div>
     )
