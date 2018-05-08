@@ -13,7 +13,14 @@ const SessionRequest = ({onSubmit, id, topics, token, handleSubmit, openModal, c
     (<div>
         <button className="btn btn-block btn-lg btn-primary my-2" onClick={openModal}>Session Request</button>
         <Modal modal={modal} closeModal={closeModal}>
-          <SessionRequestForm topics={topics} onSubmit={onSubmit} initialValues={{topic: 1}}/>
+          <SessionRequestForm
+            topics={topics}
+            onSubmit={onSubmit}
+            initialValues={{
+              topic: 1,
+              date: new Date()
+            }}
+          />
         </Modal>
       </div>
     );
