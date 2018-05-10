@@ -141,7 +141,10 @@ export const endSession = (token, dispatch, id) => {
     isStarted: true
   });
 
-  sendToServer({type: "end-session"});
+  sendToServer({
+    type: "end-session",
+    payload: id
+  });
 
   dispatch({type: END_SESSION});
 };

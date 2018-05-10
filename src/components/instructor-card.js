@@ -14,7 +14,7 @@ export const InstructorCard = ({instructor}) => {
       <div className="card-body">
         <div className="divider"/>
         <div>Total Sessions: {instructor.sessionCount}</div>
-        <div>Rating: {instructor.rating}</div>
+        <div>Rating: {Number.parseFloat(instructor.rating).toFixed(2)}</div>
         <div>Hourly Rate: {instructor.hourlyRate}$</div>
       </div>
       <div className="card-footer">

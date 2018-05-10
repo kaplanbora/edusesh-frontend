@@ -32,10 +32,11 @@ class ReviewList extends Component {
       return <Loading/>;
     }
 
+    const rate = reviews ? Number.parseFloat(average(reviews)).toFixed(2) : 0;
     return (
       <div>
         <button className="btn btn-block btn-primary btn-lg my-2" onClick={openModal}>See All Reviews</button>
-        <span className="d-block label p-2 text-center">Average Rating: {average(reviews)}</span>
+        <span className="d-block label p-2 text-center">Average Rating: {rate}</span>
         <Modal modal={modal} closeModal={closeModal}>
           <h2>User Reviews</h2>
           <div className="divider"/>
