@@ -69,9 +69,9 @@ export const startConnection = (session, user, token, dispatch, localStream, rem
     peerConnection = new RTCPeerConnection({
       iceServers: [
         {
-          urls: "turn:numb.viagenie.ca:3478",
-          username: "procsyma",
-          credential: "159896"
+          urls: "url",
+          username: "username",
+          credential: "credential"
         }
       ]
     });
